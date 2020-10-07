@@ -1,0 +1,72 @@
+Australia,Moises Henriques,All Rounder,2
+Australia,Marcus Stoinis,All Rounder,2
+India,Hardik Pandya,All Rounder,2
+India,Yuvraj Singh,All Rounder,2
+New Zealand,James Neesham,All Rounder,2
+Pakistan,Mohammad Hafeez,All Rounder,2
+Pakistan,Imad Wasim,All Rounder,2
+South Africa,Farhaan Behardien,All Rounder,2
+Sri Lanka,Thisara Perera,All Rounder,2
+Australia,Travis Head,Batsman,2
+Bangladesh,Mahmudullah,Batsman,2
+Bangladesh,Tamim Iqbal,Batsman,2
+Bangladesh,Soumya Sarkar,Batsman,2
+India,Kedar Jadhav,Batsman,2
+India,Ajinkya Rahane,Batsman,2
+New Zealand,Ross Taylor,Batsman,2
+Pakistan,Ahmed Shehzad,Batsman,2
+Pakistan,Azhar Ali,Batsman,2
+Pakistan,Umar Akmal,Batsman,2
+South Africa,David Miller,Batsman,2
+Sri Lanka,Upul Tharanga,Batsman,2
+Sri Lanka,Dinesh Chandimal,Batsman,2
+Sri Lanka,Chamara Kapugedera,Batsman,2
+Australia,James Pattinson,Bowler,2
+Bangladesh,Taskin Ahmed,Bowler,2
+England,Adil Rashid,Bowler,2
+England,Jake Ball,Bowler,2
+England,Liam Plunkett,Bowler,2
+England,David Willey,Bowler,2
+India,Ravichandran Ashwin,Bowler,2
+New Zealand,Tim Southee,Bowler,2
+New Zealand,Adam Milne,Bowler,2
+New Zealand,Mitchell Santner,Bowler,2
+Pakistan,Junaid Khan,Bowler,2
+South Africa,Wayne Parnell,Bowler,2
+Australia,Matthew Wade ,Keeper,2
+Bangladesh,Mushfiqur Rahim,Keeper,2
+England,Jonny Bairstow,Keeper,2
+New Zealand,Luke Ronchi,Keeper,2
+Pakistan,Sarfraz Ahmed,Keeper,2
+Sri Lanka,Kusal Perera,Keeper,2
+Sri Lanka,Niroshan Dickwella,Keeper,2
+Australia,John Hastings,All Rounder,1
+Bangladesh,Mashrafe Mortaza,All Rounder,1
+Bangladesh,Mehedi Hasan,All Rounder,1
+New Zealand,Colin de Grandhomme,All Rounder,1
+South Africa,Andile Phehlukwayo,All Rounder,1
+South Africa,Dwaine Pretorius,All Rounder,1
+Sri Lanka,Seekkuge Prasanna,All Rounder,1
+Bangladesh,Sabbir Rahman,Batsman,1
+Bangladesh,Imrul Kayes,Batsman,1
+Bangladesh,Mosaddek Hossain,Batsman,1
+New Zealand,Neil Broom,Batsman,1
+Pakistan,Babar Azam,Batsman,1
+Pakistan,Fakhar Zaman,Batsman,1
+Sri Lanka,Asela Gunaratne,Batsman,1
+Australia,Adam Zampa,Bowler,1
+Bangladesh,Rubel Hossain,Bowler,1
+Bangladesh,Shafiul Islam,Bowler,1
+Bangladesh,Sunzamul Islam,Bowler,1
+England,Mark Wood,Bowler,1
+New Zealand,Jeetan Patel,Bowler,1
+Pakistan,Fahim Ashraf,Bowler,1
+Pakistan,Hasan Ali,Bowler,1
+Pakistan,Shadab Khan,Bowler,1
+South Africa,Keshav Maharaj,Bowler,1
+Sri Lanka,Suranga Lakmal,Bowler,1
+Sri Lanka,Nuwan Pradeep,Bowler,1
+Sri Lanka,Lakshan Sandakan,Bowler,1
+England,Sam Billings,Keeper,1
+India,Dinesh Karthik,Keeper,1
+Sri Lanka,Kusal Mendis,Keeper,1

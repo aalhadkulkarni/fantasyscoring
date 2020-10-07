@@ -1,0 +1,121 @@
+Team,Name,Role,Base Price,id
+SA,Chris Morris,All Rounder,4L,836
+SA,Jean-Paul Duminy,All Rounder,3L,182
+SA,Farhaan Behardien,All Rounder,2L,457
+SA,Andile Phehlukwayo,All Rounder,1L,1662
+SA,Dwaine Pretorius,All Rounder,1L,837
+SA,AB de Villiers,Batsman,4L,233
+SA,Hashim Amla,Batsman,4L,456
+SA,Faf du Plessis,Batsman,3L,24
+SA,David Miller,Batsman,2L,187
+SA,Imran Tahir,Bowler,4L,898
+SA,Kagiso Rabada,Bowler,4L,1664
+SA,Morne Morkel,Bowler,3L,169
+SA,Wayne Parnell,Bowler,2L,223
+SA,Keshav Maharaj,Bowler,1L,1894
+SA,Quinton de Kock,Keeper,4L,834
+AUS,Glenn Maxwell,All Rounder,3L,282
+AUS,Moises Henriques,All Rounder,2L,388
+AUS,Marcus Stoinis,All Rounder,2L,964
+AUS,John Hastings,All Rounder,1L,748
+AUS,Steven Smith,Batsman,4L,271
+AUS,David Warner,Batsman,4L,170
+AUS,Aaron Finch,Batsman,3L,167
+AUS,Chris Lynn,Batsman,3L,179
+AUS,Travis Head,Batsman,2L,1020
+AUS,Pat Cummins,Bowler,4L,488
+AUS,Mitchell Starc,Bowler,4L,490
+AUS,Josh Hazlewood,Bowler,3L,857
+AUS,James Pattinson,Bowler,2L,199
+AUS,Adam Zampa,Bowler,1L,958
+AUS,Matthew Wade,Keeper,2L,290
+NZ,Corey Anderson,All Rounder,4L,968
+NZ,James Neesham,All Rounder,2L,971
+NZ,Colin de Grandhomme,All Rounder,1L,820
+NZ,Kane Williamson,Batsman,4L,440
+NZ,Martin Guptill,Batsman,4L,431
+NZ,Ross Taylor,Batsman,2L,226
+NZ,Neil Broom,Batsman,1L,1280
+NZ,Trent Boult,Bowler,4L,969
+NZ,Mitchell McClenaghan,Bowler,3L,730
+NZ,Tim Southee,Bowler,2L,307
+NZ,Adam Milne,Bowler,2L,435
+NZ,Mitchell Santner,Bowler,2L,1903
+NZ,Jeetan Patel,Bowler,1L,974
+NZ,Tom Latham,Keeper,3L,1140
+NZ,Luke Ronchi,Keeper,2L,338
+ENG,Ben Stokes,All Rounder,4L,1154
+ENG,Moeen Ali,All Rounder,3L,1735
+ENG,Joe Root,Batsman,4L,887
+ENG,Alex Hales,Batsman,3L,511
+ENG,Jason Roy,Batsman,3L,1906
+ENG,Eoin Morgan,Batsman,3L,197
+ENG,Chris Woakes,Bowler,3L,967
+ENG,Adil Rashid,Bowler,2L,796
+ENG,Jake Ball,Bowler,2L,3310
+ENG,Liam Plunkett,Bowler,2L,1842
+ENG,David Willey,Bowler,2L,2758
+ENG,Mark Wood,Bowler,1L,2749
+ENG,Jos Buttler,Keeper,4L,509
+ENG,Jonny Bairstow,Keeper,2L,506
+ENG,Sam Billings,Keeper,1L,2756
+IND,Ravindra Jadeja,All Rounder,4L,9
+IND,Hardik Pandya,All Rounder,2L,2740
+IND,Yuvraj Singh,All Rounder,2L,113
+IND,Virat Kohli,Batsman,4L,164
+IND,Shikhar Dhawan,Batsman,3L,41
+IND,Rohit Sharma,Batsman,3L,107
+IND,Kedar Jadhav,Batsman,2L,297
+IND,Ajinkya Rahane,Batsman,2L,135
+IND,Bhuvneshwar Kumar,Bowler,3L,116
+IND,Mohammed Shami,Bowler,3L,94
+IND,Umesh Yadav,Bowler,3L,59
+IND,Jasprit Bumrah,Bowler,3L,1124
+IND,Ravichandran Ashwin,Bowler,2L,8
+IND,MS Dhoni,Keeper,4L,1
+IND,Dinesh Karthik,Keeper,1L,102
+PAK,Shoaib Malik,All Rounder,3L,314
+PAK,Mohammad Hafeez,All Rounder,2L,441
+PAK,Imad Wasim,All Rounder,2L,2760
+PAK,Ahmed Shehzad,Batsman,2L,979
+PAK,Azhar Ali,Batsman,2L,985
+PAK,Haris Sohail,All Rounder,1L,855
+PAK,Babar Azam,Batsman,1L,2759
+PAK,Fakhar Zaman,Batsman,1L,3801
+PAK,Mohammad Amir,Bowler,4L,2896
+PAK,Wahab Riaz,Bowler,3L,988
+PAK,Junaid Khan,Bowler,2L,981
+PAK,Fahim Ashraf,Bowler,1L,4208
+PAK,Hasan Ali,Bowler,1L,3325
+PAK,Shadab Khan,Bowler,1L,3046
+PAK,Sarfraz Ahmed,Keeper,2L,846
+SL,Angelo Mathews,All Rounder,3L,217
+SL,Thisara Perera,All Rounder,2L,215
+SL,Seekkuge Prasanna,All Rounder,1L,808
+SL,Upul Tharanga,Batsman,2L,501
+SL,Dinesh Chandimal,Batsman,2L,230
+SL,Chamara Kapugedera,Batsman,2L,353
+SL,Asela Gunaratne,Batsman,1L,3153
+SL,Lasith Malinga,Bowler,4L,211
+SL,Nuwan Kulasekara,Bowler,3L,23
+SL,Suranga Lakmal,Bowler,1L,993
+SL,Nuwan Pradeep,Bowler,1L,505
+SL,Lakshan Sandakan,Bowler,1L,1869
+SL,Kusal Perera,Keeper,2L,1738
+SL,Niroshan Dickwella,Keeper,2L,1847
+SL,Kusal Mendis,Keeper,1L,1670
+BAN,Shakib Al Hasan,All Rounder,4L,201
+BAN,Mashrafe Mortaza,All Rounder,1L,391
+BAN,Mehedi Hasan,All Rounder,1L,1597
+BAN,Mahmudullah,Batsman,2L,492
+BAN,Tamim Iqbal,Batsman,2L,287
+BAN,Soumya Sarkar,Batsman,2L,1919
+BAN,Sabbir Rahman,Batsman,1L,1734
+BAN,Imrul Kayes,Batsman,1L,1493
+BAN,Mosaddek Hossain,Batsman,1L,1588
+BAN,Mustafizur Rahman,Bowler,4L,1594
+BAN,Taskin Ahmed,Bowler,2L,1839
+BAN,Rubel Hossain,Bowler,1L,1135
+BAN,Shafiul Islam,Bowler,1L,499
+BAN,Sunzamul Islam,Bowler,1L,3710
+BAN,Mushfiqur Rahim,Keeper,2L,491

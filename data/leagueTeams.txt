@@ -1,0 +1,5 @@
+Karad,100
+Thane,100
+Kolhapur,100
+Miraj,100
+Pune,100

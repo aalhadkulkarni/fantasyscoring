@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyD6jiFzXv1Bhq9gt_6QrNYzN7-cSTdVwZw",
+        authDomain: "fantasy-league-b5923.firebaseapp.com",
+        databaseURL: "https://fantasy-league-b5923.firebaseio.com",
+        projectId: "fantasy-league-b5923",
+        storageBucket: "fantasy-league-b5923.appspot.com",
+        messagingSenderId: "515207765166"
+    };
+    firebase.initializeApp(config);
+    var database = firebase.database();
+</script>
+
+<script>
+    database.ref("fantasyTeams").on('value', function (data) {
+        var fantasyTeams = data.val();
+
+        var matchId = 24;
+        for (var i in fantasyTeams) {
+            var fantasyTeam = fantasyTeams[i];
+            var applicableMatchId = 1;
+            var scoringPlayers = fantasyTeam.scoringPlayers;
+            for (var j in scoringPlayers) {
+                if (parseInt(j) > parseInt(applicableMatchId) && parseInt(j) <= parseInt(matchId)) {
+                    applicableMatchId = j;
+                }
+            }
+            var playerList = scoringPlayers[j];
+            for(var k in playerList) {
+                if (playerList[k] == 233) {
+                    if (k == 0) {
+                        console.log((fantasyTeam.userName || fantasyTeam.emailId) + " : Captain");
+                        //console.log(fantasyTeam, applicableMatchId);
+                    } else if (k == 1) {
+                        console.log((fantasyTeam.userName || fantasyTeam.emailId) + " : Vice Captain");
+                        //console.log(fantasyTeam, applicableMatchId);
+                    } else {
+                        console.log((fantasyTeam.userName || fantasyTeam.emailId));
+                        //console.log(fantasyTeam, applicableMatchId);
+                    }
+                    break;
+                }
+            }
+            //console.log((fantasyTeam.userName || fantasyTeam.emailId) + " : " + fantasyTeam.transfersRemaining + " , " + fantasyTeam.ccRemaining + " , " + fantasyTeam.vccRemaining);
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select XI</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+
+<script>
+    var tournamentState;
+    var selectedTeam = null;
+
+    var selectedPlayers = {};
+
+    function toggleSelect(playerId)
+    {
+        selectedPlayers[playerId] = !selectedPlayers[playerId];
+        $("#player" + playerId).removeClass("success");
+        if(selectedPlayers[playerId])
+        {
+            $("#player" + playerId).addClass("success");
+        }
+    }
+
+    function init()
+    {
+        $.ajax
+        ({
+            type: "POST",
+            url: "tempPlayers.php",
+            data:
+            {
+                tournamentId: "ipl2017"
+            },
+            success: function(data)
+            {
+                tournamentState = data;
+            }
+        });
+    }
+
+    window.onload = init;
+
+    function displayTeam()
+    {
+        var teamName = $("#team").val();
+        var leagueTeams = tournamentState.leagues[0].leagueTeams;
+        for(var i in leagueTeams)
+        {
+            var leagueTeam = leagueTeams[i];
+            if(leagueTeam.ownerName == teamName)
+            {
+                selectedTeam = leagueTeam;
+                break;
+            }
+        }
+
+        var table = $("#playersTable tbody");
+        var leaguePlayers = selectedTeam.leaguePlayers;
+        var rolesArr = ["Batsman", "Keeper", "All Rounder", "Bowler"];
+        for(var i in rolesArr)
+        {
+            var curRole = rolesArr[i];
+            for(var i in leaguePlayers)
+            {
+                var leaguePlayer = tournamentState.players[leaguePlayers[i].id];
+
+                var name = leaguePlayer.name + " (" + leaguePlayer.cricketTeam + ")";
+                var role = leaguePlayer.role;
+
+                if(role!=curRole)
+                {
+                    continue;
+                }
+
+                var nameCol = $("<td></td>");
+                nameCol.html(name);
+
+                var roleCol = $("<td></td>");
+                roleCol.html(role);
+
+                var row = $("<tr id='player" + leaguePlayer.id + "' onclick='toggleSelect(" + leaguePlayer.id + ")'></tr>");
+
+                row.append(nameCol);
+                row.append(roleCol);
+
+                table.append(row);
+
+                var option = $("<option value='" + leaguePlayer.id + "'>" + name + "</option>")
+                $("#captainSelect").append(option);
+            }
+        }
+    }
+
+    function saveTeam()
+    {
+        var captainSelected = $("#captainSelect").val();
+        if(captainSelected == null)
+        {
+            alert("Select captain");
+            return false;
+        }
+        if(!selectedPlayers[captainSelected])
+        {
+            alert("Select= captain from the playing XI");
+            return false;
+        }
+        var count = 0;
+        var roleCount =
+        {
+            "Batsman": 0,
+            "Bowler": 0,
+            "Keeper": 0,
+            "All Rounder": 0
+        };
+        var players = [];
+        for(var i in selectedPlayers)
+        {
+            if(selectedPlayers[i])
+            {
+                var player = tournamentState.players[i];
+                players.push(i);
+                count++;
+                roleCount[player.role]++;
+            }
+        }
+
+        var points = 0;
+
+        if(count!=11)
+        {
+            alert("Select 11 players");
+            return;
+        }
+        if(roleCount["Batsman"]<3)
+        {
+            if(!confirm("You have selected less than 3 batsmen. Select this XI with the fine of 500 points?"))
+            {
+                return;
+            }
+            points = 500;
+        }
+        else if(roleCount["Bowler"]<2)
+        {
+            if(!confirm("You have selected less than 2 bowlers. Select this XI with the fine of 500 points?"))
+            {
+                return;
+            }
+            points = 500;
+        }
+        else if(roleCount["Keeper"]<1)
+        {
+            if(!confirm("You haven't selected a keeper. Select this XI with the fine of 500 points?"))
+            {
+                return;
+            }
+            points = 500;
+        }
+        else if(roleCount["All Rounder"]<1)
+        {
+            if(!confirm("You have selected less than 3 batsmen. Select this XI with the fine of 500 points?"))
+            {
+                return;
+            }
+            points = 500;
+        }
+        else if(roleCount["Batsman"] + roleCount["Batsman"] + roleCount["Batsman"] < 7)
+        {
+            if(!confirm("You have selected less than 7 players who can bat (Batsmen + Keepers + All Rounders). Select this XI with the fine of 500 points?"))
+            {
+                return;
+            }
+            points = 500;
+        }
+        else if(roleCount["Bowler"] + roleCount["All Rounder"] < 5)
+        {
+            if(!confirm("You have selected less than 5 players who can bowl (Bowlers + All Rounders). Select this XI with the fine of 500 points?"))
+            {
+                return;
+            }
+            points = 500;
+        }
+
+        if(confirm("Are you sure?"))
+        {
+            var xi = captainSelected + "," + players.join(",") + "," + points;
+            $.ajax
+            ({
+                type: "POST",
+                url: "saveXI.php",
+                data:
+                {
+                    team: selectedTeam.ownerName,
+                    xi: xi
+                },
+                success: function(data)
+                {
+                    if(data == "1")
+                    {
+                        alert("Team saved successfully");
+                    }
+                    else
+                    {
+                        alert("Team could not be saved. Please try again.");
+                    }
+                },
+                error: function (error)
+                {
+                    alert("Team could not be saved. Please try again.");
+                }
+            });
+        }
+    }
+</script>
+
+<body>
+
+<div class="container">
+    <div class="panel panel-info">
+        <div class="panel panel-heading">
+            Select team
+        </div>
+        <div>
+            <div class="panel panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <select class="form-control" id="team">
+                            <option value="Thane">Thane</option>
+                            <option value="Pune">Pune</option>
+                            <option value="Karad">Karad</option>
+                            <option value="Kolhapur">Kolhapur</option>
+                            <option value="Miraj">Miraj</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <button class="form-control btn-info" onclick="displayTeam()">See team</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="panel panel-info">
+        <div class="panel panel-heading">
+            Select XI
+        </div>
+        <div>
+            <table class="table table-condensed" id="playersTable">
+                <thead>
+                <tr>
+                    <th>
+                        Select captain:
+                    </th>
+                    <th>
+                        <select class="form-control" id="captainSelect">
+                        </select>
+                    </th>
+                </tr>
+                <tr>
+                    <th>Player</th>
+                    <th>Role</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <button class="btn-info form-control" onclick="saveTeam()">
+                            Save XI
+                        </button>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

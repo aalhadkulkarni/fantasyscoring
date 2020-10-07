@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <title>Fake download via datauri</title>
+</head>
+
+<body>
+
+<textarea cols="50" rows="10" id="source">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
+<br>
+<button type="button" id="save" title="Save as text file">Save</button>
+
+<script type="text/javascript">
+    // when document is ready
+    document.getElementById("save").onclick = function() {
+        // when clicked the button
+        var content = document.getElementById('source').value;
+        // a [save as] dialog will be shown
+        window.open("data:application/txt," + encodeURIComponent(content), "_self");
+    }
+</script>
+
+<button onclick="download()">Download</button>
+<script>
+    function download()
+    {
+        var str = "test";
+        var uri = 'data:text/plain;charset=utf-8,' + str;
+
+        var downloadLink = document.createElement("a");
+        downloadLink.href = uri;
+        downloadLink.download = "data.txt";
+
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    }
+</script>
+</body>
+
+</html>

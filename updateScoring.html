@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scoring</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script>
+        $.ajax
+        ({
+            type: "GET",
+            url: "http://www.espncricinfo.com/ci/engine/match/598064.json?view=live;wrappertype=live;zakamai=1",
+            //crossDomain: true,
+            dataType: 'jsonp',
+            success: function(data)
+            {
+                console.log(data);
+            },
+            error: function(e)
+            {
+                console.log(e);
+            }
+        });
+    </script>
+
+</head>
+<body>
+
+<a href="http://www.espncricinfo.com/ci/engine/match/598064.json?view=live;wrappertype=live;zakamai=1" target="ifr">Get score</a>
+
+<!--<iframe name="ifr"></iframe>-->
+<textarea name="ifr"></textarea>
+
+</body>
+</html>

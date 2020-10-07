@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Correction</title>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyD6jiFzXv1Bhq9gt_6QrNYzN7-cSTdVwZw",
+            authDomain: "fantasy-league-b5923.firebaseapp.com",
+            databaseURL: "https://fantasy-league-b5923.firebaseio.com",
+            projectId: "fantasy-league-b5923",
+            storageBucket: "fantasy-league-b5923.appspot.com",
+            messagingSenderId: "515207765166"
+        };
+        firebase.initializeApp(config);
+        var database = firebase.database();
+    </script>
+</head>
+<body>
+
+<script>
+    var pnw = {
+        "Samir Kumar": 530,
+        "Rashmi Samir": 490,
+        "Vishwanath": 420,
+        "Parvez": 400,
+        "Ajinkya Apte": 380,
+        "Yogesh Ranade": 380,
+        "Prashant Sapkal": 370,
+        "Prasanna": 350,
+        "Anoop Apte": 350,
+        "Kiran": 320,
+        "Chetan Balegeri": 310,
+        "Parag Pujari": 300,
+        "Jitendra Kolhe": 290,
+        "Harshal Tidake": 290,
+        "Sudhir Patil": 280,
+        "AMEYA DHARAP": 270,
+        "Shreyas Shringarpure": 270,
+        "Vineet Vaze": 270,
+        "Rahul Patil": 260,
+        "Gourav Pathak": 260,
+        "Amogh Kelkar": 250,
+        "Abhjit Yadav": 250,
+        "Samir Kalamade": 240,
+        "Pranit Kadam": 240,
+        "Anupam Limaye": 230,
+        "Rohit Mahajan": 230,
+        "Aditya": 200,
+        "Suhas": 190,
+        "Milind Navalikar": 190,
+        "Kedar Limaye": 180,
+        "Ani Apte": 180,
+        "Amol Bhosale": 170,
+        "Amit Vaze": 160,
+        "Mahesh": 150,
+        "Amya": 140,
+        "Ashutosh Kulkarni": 140,
+        "Dnyanesh Ranade": 140,
+        "Ninad Joshi": 140,
+        "Rajdeep Kudalkar": 140,
+        "Bhushan Kasar": 120,
+        "Smit": 110,
+        "Manohar Gadre": 110,
+        "Vivek Nanivadekar": 100,
+        "Vinod Surve": 100,
+        "Amar Bandgar": 100,
+        "Viraj Salokhe": 80,
+        "Sagar Gadre": 70,
+        "Kapil K.": 60,
+        "Sourabh Kulkarni": 60,
+        "Sandeep Kulkarni": 50,
+        "Amol Shirke": 40,
+        "Atharva Maglekar": 40,
+        "Pranil Thakare": 40,
+        "Sameer Kesarkar": 40,
+        "Aalhad": 20,
+        "ABHIJIT KULKARNI": 20,
+        "Srinivas Chappa": 20,
+        "Sunil Deo": 20,
+        "Vijay Raut": 20
+    };
+    function doCorrection(fantasyTeams) {
+        for(var teamId in fantasyTeams) {
+            correctTeam(fantasyTeams[teamId], teamId);
+        }
+    }
+
+    function correctTeam(fantasyTeam, teamId) {
+        var scoringPlayers = fantasyTeam.scoringPlayers;
+        var matches = Object.keys(scoringPlayers);
+        var changes = {
+            transfers: 0,
+            cc: 0,
+            vcc: 0
+        };
+        for (var i = 0; i < matches.length - 1; i++) {
+            var match1 = matches[i], match2 = matches[i+1];
+            getChanges(scoringPlayers[match1], scoringPlayers[match2], changes, true);
+        }
+        var transfersRemaining = 11 - changes.transfers;
+        var ccRemaining = 11 - changes.cc;
+        var vccRemaining = 11 - changes.vcc;
+        /*if (cc > 0 || vcc > 0 || transfers > 0) {
+            console.log(fantasyTeam);
+        }*/
+        if (transfersRemaining < fantasyTeam.transfersRemaining || ccRemaining < fantasyTeam.ccRemaining || vccRemaining < fantasyTeam.vccRemaining) {
+            //console.log(teamId, changes, scoringPlayers, fantasyTeam);
+            for (var i = 0; i < matches.length - 1; i++) {
+                var match1 = matches[i], match2 = matches[i+1];
+                //console.log("MATCH " + match2);
+                //getChanges(scoringPlayers[match2], scoringPlayers[match1], changes, false, "OUT");
+                //getChanges(scoringPlayers[match1], scoringPlayers[match2], changes, false, "IN");
+            }
+            console.log(changes, fantasyTeam, teamId);
+            //console.log(teamId);
+        }
+    }
+
+    function getChanges(team1, team2, changes, flag, str) {
+        if (team1[0] != team2[0]) {
+            flag && changes.cc++;
+        }
+        if (team1[1] != team2[1]) {
+            flag && changes.vcc++;
+        }
+        var exists = {};
+        for(var i = 0; i < team1.length; i++) {
+            exists[team1[i]] = 1;
+        }
+        for (var i = 0; i < team2.length; i++) {
+            if (!exists[team2[i]]) {
+                !flag && console.log(str + ": " + team2[i]);
+                flag && changes.transfers++;
+            }
+        }
+    }
+
+    function getFantasyTeams() {
+        database.ref('fantasyTeams')
+                .once('value')
+                .then(function (data) {
+                    var fantasyTeams = data.val();
+                    database.ref('matches')
+                            .once('value')
+                            .then(function (data) {
+                                var matches = data.val();
+                                for (var i in fantasyTeams) {
+                                    if (fantasyTeams[i].leagueId == 1) {
+                                        if (pnw[fantasyTeams[i].userName]) {
+                                            console.log(fantasyTeams[i].points);
+                                            console.log(pnw[fantasyTeams[i].userName]);
+                                            fantasyTeams[i].points += pnw[fantasyTeams[i].userName];
+                                            console.log(fantasyTeams[i].points);
+                                        }
+                                    }
+                                }
+                                //console.log(fantasyTeams);
+                                database.ref('fantasyTeams').set(fantasyTeams);
+                            });
+                    //doCorrection(fantasyTeams);
+                });
+    }
+
+    getFantasyTeams();
+</script>
+
+</body>
+</html>

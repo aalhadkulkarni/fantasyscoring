@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+<script>
+    var fantasyTeams = {};
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyD6jiFzXv1Bhq9gt_6QrNYzN7-cSTdVwZw",
+        authDomain: "fantasy-league-b5923.firebaseapp.com",
+        databaseURL: "https://fantasy-league-b5923.firebaseio.com",
+        projectId: "fantasy-league-b5923",
+        storageBucket: "fantasy-league-b5923.appspot.com",
+        messagingSenderId: "515207765166"
+    };
+    firebase.initializeApp(config);
+    var database = firebase.database();
+</script>
+
+<script>
+    database.ref("fantasyTeams").on('value', function (data) {
+        fantasyTeams = data.val();
+        for(var i in fantasyTeams) {
+            if (fantasyTeams[i].leagueId == 1) {
+                console.log(i + "," + (fantasyTeams[i].userName || fantasyTeams[i].emailId || fantasyTeams[i].name));
+            }
+        }
+
+    });
+</script>
+
+</body>
+</html>

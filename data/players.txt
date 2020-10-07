@@ -1,0 +1,195 @@
+1,MS Dhoni,Keeper,CSK
+7,Murali Vijay,Batsman,CSK
+9,Ravindra Jadeja,All Rounder,CSK
+14,Suresh Raina,Batsman,CSK
+24,Faf Du Plessis,Batsman,CSK
+25,Dwayne Bravo,Keeper,CSK
+100,Ambati Rayudu,Keeper,CSK
+103,Harbhajan Singh,Bowler ,CSK
+227,Shane Watson,Bowler ,CSK
+297,Kedar Jadhav,All Rounder,CSK
+898,Imran Tahir,Batsman,CSK
+1118,Karn Sharma,Keeper,CSK
+1745,Shardul Thakur,Bowler,CSK
+1903,Mitchell Santner,Bowler ,CSK
+3746,Lungisani Ngidi,All Rounder ,CSK
+5443,Ruuraj Gaikwad ,Batsman,CSK
+140,Deepak Chahar,Bowler,CSK
+4942,Narayan Jagadeesan,Batsman,CSK
+4944,KM Asif,All Rounder,CSK
+1560,Monu Kumar,Bowler,CSK
+1107,Mohit Sharma,Batsman,DC
+1563,Shreyas Ayyar,Batsman,DC
+1561,Avesh Khan,Bowler,DC
+969,Trent boult,Bowler,MI
+41,Shikhar Dhawan,Batsman,DC
+168,Colin Ingram,Batsman,DC
+3013,Sandeep Lamichane,Bowler,DC
+3789,Manjot Kalra,Batsman,DC
+30,Amit Mishra,Bowler,DC
+836,Chris Moris ,All Rounder ,RCB
+773,Colin Munro,Batsman,DC
+2972,Rishabh Pant,Keeper,DC
+1113,Axar Patel,All Rounder ,DC
+157,Harshal Patel,Bowler,DC
+3101,Keemo Paul,Bowler,DC
+1664,Kagiso Rabada,Bowler,DC
+5396,Shefane Rutherford,All Rounder ,DC
+1087,Jalaj Saxena,All Rounder ,DC
+38,Ishant Sharma,Bowler,DC
+3764,Prithvi Shaw,Batsman,DC
+3186,Nathu Singh,Bowler,DC
+1749,Rahul Tewatia ,Bowler,RR
+1117,Hanuma Vihari,Batsman,DC
+5445,Bandaru Ayappa,All Rounder ,DC
+1558,Ankush Bains ,Keeper,DC
+102,Dinesh Karthik,Keeper,KKR
+3779,Shivam Mavi,Bowler ,KKR
+261,Kuldeep yadav,Bowler ,KKR
+1737,Harry Gurney,Bowler ,KKR
+203,Sunil Naraine,Bowler ,KKR
+76,Piyush Chawala,Bowler ,CSK
+2732,Nikhil Naik,Keeper,KKR
+3729,Lockie Ferguson,Bowler ,KKR
+5105,Prasidh Krishna ,Bowler ,KKR
+177,Andre Russel,All Rounder,KKR
+3761,Shubhman Gill,Batsman,KKR
+2738,Nitish Rana,Batsman,KKR
+179,Chrish Lynn,Batsman,MI
+3766,Kamlesh Nagarkoti,Bowler ,KKR
+3830,Rinku Singh,Batsman,KKR
+127,Robin Uthappa,Batsman,RR
+158,Mayank Agarwal,Batsman,KXIP
+4698,Arshdeep Singh,Bowler ,KXIP
+3187,Murgan Ashiwin,Bowler ,KXIP
+8,Ravichandran Ashwin,Bowler ,DC
+5440,Agnivesh Ayachi,All Rounder ,KXIP
+2939,Sam Curran,All Rounder ,CSK
+236,Chris Gayle ,Batsman,KXIP
+5441,Harpreet Brar,All Rounder ,KXIP
+388,Moises Henriques,All Rounder ,KXIP
+1564,Sarfraz Khan,Batsman,KXIP
+72,Mandeep Singh,Batsman,KXIP
+187,David Miller,Batsman,RR
+94,Mohammad Shami,Bowler ,KXIP
+4572,Mujeeb Ur Rehman,Bowler ,KXIP
+276,Karun Nair ,Batsman,KXIP
+4447,Darshan Nalkande,All Rounder ,KXIP
+1703,Nicolas Pooran,Keeper,KXIP
+1125,KL Rahul,Keeper,KXIP
+1106,Ankit Rajpoot ,Bowler ,RR
+5436,Simran Singh,Keeper,KXIP
+1480,Andrew Tye,Bowler ,RR
+5432,Varun Chakravarthy,All Rounder ,KXIP
+1276,Hardus Vilojen,Bowler ,KXIP
+107,Rohit Sharama,Batsman,MI
+834,Qinton De Kock,keeper,MI
+1740,Jayant Yadav,Bowler ,MI
+210,Kieron Pollard ,All Rounder ,MI
+211,Lasith Malinga,Bowler ,MI
+2965,Anmolpreet Singh,Batsman,MI
+4951,Mayank Markande,Bowler ,RR
+730,Mitchel McClenaghan,Bowler ,MI
+2975,Ishan Kishan,Keeper,MI
+99,Aditya Tare,Keeper,MI
+1124,Jaspreet Bumrah,Bowler ,MI
+108,Suryakkumar Yadav,Batsman,MI
+3183,Krunal Pandya,All Rounder ,MI
+3763,Rahul Chahar,Bowler ,MI
+2739,Siddhesh Lad,Batsman,MI
+2740,Hardik Pandya,All Rounder ,MI
+3774,Anukul Roy,Bowler ,MI
+164,Virat Kohli,Batsman,RCB
+1735,Moeen Ali,All Rounder,RCB
+111,Yuzvendra Chahal,Bowler,RCB
+840,Nathan Coulter-Nile,Bowler,MI
+233,AB de Villiers,Batsman,RCB
+5431,Shivam Dubey,All Rounder,RCB
+253,Gurkreet Maan Singh,All Rounder,RCB
+1705,Shimron Hetmyer,Batsman,DC
+3840,Mohd Siraj,Bowler,RCB
+53,Pawan Negi,Bowler,RCB
+5430,Devdutt Paddikal,Batsman,RCB
+44,Parthiv Patel,Keeper,RCB
+3824,Navdeep Saini,Bowler,RCB
+964,Marcus Stoinis,All Rounder,DC
+59,Umesh Yadav,Bowler,RCB
+2973,Washington Sundar,Bowler,RCB
+271,Steve Smith ,Batsman,RR
+258,Sanju Samson,Keeper,RR
+1154,Ben Stokes,All Rounder,RR
+5444,Shubham Ranjane,All Rounder,RR
+1285,Ashton Turner,All Rounder,RR
+135,Ajinkya Rahane,Batsman,DC
+148,Stuart Binny,All Rounder,RR
+1748,Shreyas Gopal,Bowler,RR
+4950,Sudheshan Midhun,Bowler,RR
+86,Jaydev Unadkat,Bowler,RR
+1304,Ish Sodhi,Bowler,RR
+3226,Prashant Chopra,Keeper,RR
+2970,Mahipal Lomoror,All Rounder,RR
+5146,Oshane Thomas ,Bowler,RR
+4956,Aryaman Vikram Birla,Batsman,RR
+4445,Riyan Parag,All Rounder,RR
+101,Dhawal Kulkarni,Bowler,MI
+3502,Jofra Archer,All Rounder,RR
+61,Varun Aaron,Bowler,RR
+509,Jos Buttler,Keeper,RR
+3261,Shashank Singh,All Rounder,RR
+1085,Manan Vohra,Batsman,RR
+3838,Rahul Tripathi,Batsman,RR
+3834,Gowtham Krishnappa,Bowler,KXIP
+170,David Warner,Batsman,SRH
+2885,Rashid Khan,Bowler,SRH
+618,Mohammad Nabi,Bowler,SRH
+3760,Abhishek Sharma,All Rounder,SRH
+16,Wriddhiman Saha,Keeper,SRH
+3825,Basil Thampi,Bowler,SRH
+1521,Bill Stanlake,Bowler,SRH
+2964,Syed Khaleel Ahmed,Bowler,SRH
+116,Bhuvneshwar Kumar,Bowler,SRH
+1556,Deepak Hooda,All Rounder,KXIP
+3831,T Natarajan,Bowler,SRH
+1112,Sandeep Sharma,Bowler,SRH
+440,Kane Williamson,Batsman,SRH
+57,Shahabaz Nadeem,Bowler,SRH
+506,Jonny Bairstow,Keeper,SRH
+123,Manish Pandey,Batsman,SRH
+1083,Vijay Shankar,All Rounder,SRH
+1086,Siddharth Kaul,Bowler,SRH
+95,Shreevats Goswami,Keeper,SRH
+13538,Yashasvi Jaiswal,All Rounder,RR
+3646,Tom Curran,All Rounder,RR
+5146,Oshane Thomas ,Bowler,RR
+5443,Ruturaj Gaikwad ,Batsman,CSK
+857,Josh Hazlewood,Bowler,CSK
+1906,Jason Roy,Batsman,DC
+967,Chris Woakes,All Rounder,DC
+3882,Alex Carey,Keeper,DC
+3257,Tushar Deshpande,Bowler,DC
+282,Glenn Maxwell,All Rounder,KXIP
+1309,Sheldon Cottrell,Bowler,KXIP
+1114,Pravin Tambe,All Rounder,KKR
+197,Eoin Morgan,Batsman,KKR
+488,Pat Cummins,Bowler,KKR
+163,Saurabh Tiwary,Batsman,MI
+4952,Mohsin Khan,Bowler,MI
+5396,Sherfane Rutherford,Batsman,MI
+167,Aaron Finch,Batsman,RCB
+180,Dale Steyn,Bowler,RCB
+798,Kane Richardson,Bowler,RCB
+4518,Josh Philippe,Keeper,RCB
+3775,Priyam Garg,Batsman,SRH
+1707,Fabian Allen,All Rounder,SRH
+221,Mitchell Marsh,All Rounder,SRH
+10631,Sanjay Yadav,Batsman,SRH
+19351,Ravi Bishnoi,Bowler,KXIP
+1299,Chris Jordan,Bowler,KXIP
+971,Jimmy Neesham,All Rounder,KXIP
+3777,Ishan Porel,Bowler,KXIP
+12585,Akash Singh,Bowler,RR
+10059,Kartik Tyagi,Bowler,RR
+6399,Anirudha Joshi,Bowler,RR
+3770,Tom Banton,Keeper,KKR
+7119,M Siddharth,All Rounder,KKR
+1092,Sandeep Warrier,Bowler,KKR

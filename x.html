@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyD6jiFzXv1Bhq9gt_6QrNYzN7-cSTdVwZw",
+        authDomain: "fantasy-league-b5923.firebaseapp.com",
+        databaseURL: "https://fantasy-league-b5923.firebaseio.com",
+        projectId: "fantasy-league-b5923",
+        storageBucket: "fantasy-league-b5923.appspot.com",
+        messagingSenderId: "515207765166"
+    };
+    firebase.initializeApp(config);
+    var database = firebase.database();
+
+    var pnw = {
+        "-L9Gatwkl6q_SFSb6tq8": "250",
+        "-L9GckDezzLoGGG5fILc": "575",
+        "-L9Ge_E3kVtlwyIWnxO2": "0",
+        "-L9GgezGVss6ZWDuCyTu": "0",
+        "-L9Gk6KcaFBiT-bf0u2K": "300",
+        "-L9Gqw53-7s1_F2nKbGe": "450",
+        "-L9HE_YbOEnMY9K_c0Nd": "375",
+        "-L9IYShOrySYqgxL8FdH": "525",
+        "-L9I_5m-22yf1ywLJglj": "900",
+        "-L9IiRnfZZyxKsDh2G7O": "175",
+        "-L9J0J7dzazD1A_bfYd2": "925",
+        "-L9JDPix_uCsj4FxCSW0": "700",
+        "-L9JOHSnVqe2HuuXil4z": "650",
+        "-L9J_UOBvJEkWWqv0gE3": "50",
+        "-L9J_ego7ljVpdRubxbO": "325",
+        "-L9JjKNW7T0wK9kVT003": "0",
+        "-L9JyLBqGO_oeIWq9lxZ": "675",
+        "-L9K218gHWdRd7k7sg5r": "125",
+        "-L9K4Srn3GtYfDKFNrPf": "100",
+        "-L9K771L5Ji0GEEUryGw": "600",
+        "-L9KEv8ByWiB5G8MJ4cN": "250",
+        "-L9Kq5k-ZKctNTT_J59K": "0",
+        "-L9KrZBShL2Ud2EWaBZ0": "300",
+        "-L9KukKgs3n6e1JZja6k": "775",
+        "-L9Kx6Zx6I5nhujz1weQ": "700",
+        "-L9L2RjZIuzXO0g_UQts": "0",
+        "-L9LGzukmrPMVKsivDBR": "0",
+        "-L9LUY819ci6rIczZbJr": "700",
+        "-L9Lgk1_s5tGoc4A7xYw": "875",
+        "-L9LkQA8bdgiVZSuDC0r": "150",
+        "-L9LmEU19Ab18GjrOhx5": "700",
+        "-L9Ltd9Oi-fyZCYLjfdk": "350",
+        "-L9LzM4NRwaYzhbE06Cm": "625",
+        "-L9M2-hWxcXhY2swtirO": "0",
+        "-L9MS_t4WiUlb-FjcBl9": "125",
+        "-L9Me9Fp6Wn3pFY6QY-k": "750",
+        "-L9MqBAHfewNpRWEJacf": "150",
+        "-L9NhISVe2IOVqv07xAL": "850",
+        "-L9Nuah_m3igN0erQznU": "0",
+        "-L9O9vAC1TVaQ7pSQlFl": "0",
+        "-L9OFqOfd_2BIQGiYFPZ": "525",
+        "-L9OHspxxa03BYeDr4_f": "0",
+        "-L9OQmX5ruWa7CdoT6Go": "650",
+        "-L9OS8n6eg_AYWy1-nHi": "750",
+        "-L9OXCU5K1OCN9EwEpoD": "250",
+        "-L9OYdI8kOmPllBemNm9": "700",
+        "-L9OaUDAMxoCNJOpYv_w": "0",
+        "-L9OjgmCphHSrn6rNpQ_": "775",
+        "-L9P1_k2d3jXuBuyA7gq": "100",
+        "-L9P592KjKFVlUQJEgu7": "0",
+        "-L9P8uE3SeKtiGqBvWa9": "0",
+        "-L9PIYhJ1Kdtb_-b7F8B": "675",
+        "-L9PaK2aqFV-JwQTcpwW": "0",
+        "-L9PvpoxAPtZ4a9IQyUj": "425",
+        "-L9QC8WViUn2JQihI__s": "775",
+        "-L9QGJB4SEpodk2869WK": "100",
+        "-L9QHnFy4_B9K6r5aui0": "700",
+        "-L9QIqXHPrxMnHmd3him": "0",
+        "-L9QM-fUTY2mamfcgGRg": "250",
+        "-L9QMWHFjs1gRQ18Pqqo": "0",
+        "-L9QPngXcXDLvTDHcFGf": "425",
+        "-L9QPxamelguwcFY1Bbr": "775",
+        "-L9QWZl3dX-wrEBJzKr8": "675",
+        "-L9QfdNmUv4LKlzxO_kZ": "350",
+        "-L9Ql6sbg-pkI373Usym": "0",
+        "-L9QuDahtALfeb4euQ2B": "0",
+        "-L9QwGkWoo0CPp1ieKyq": "975",
+        "-L9RAZx6QeUcs5iwZbyS": "500"
+    }
+</script>
+
+<script>
+    var fantasyPlayers = {};
+    var fantasyTeams = {};
+    var matches = {};
+    getFantasyTeams();
+    function getFantasyTeams() {
+        database.ref('fantasyTeams')
+                .once('value')
+                .then(function (data) {
+                    fantasyTeams = data.val();
+                    updateTeams();
+                });
+    }
+
+    function updateTeams() {
+        for (var i in fantasyTeams) {
+            var fantasyTeam = fantasyTeams[i];
+            if (fantasyTeam.leagueId == 2) continue;
+            var pnwPoints = parseInt(pnw[i]);
+            fantasyTeam.points += pnwPoints;
+        }
+        database.ref("fantasyTeams").set(fantasyTeams);
+    }
+
+    //    function getFantasyPlayers() {
+    //        database.ref('players')
+    //                .once('value')
+    //                .then(function (data) {
+    //                    fantasyPlayers = data.val();
+    //                    updatePlayers();
+    //                });
+    //    }
+
+    //    function updatePlayers() {
+    //        for (var playerId in fantasyPlayers) {
+    //            var fantasyPlayer = fantasyPlayers[playerId];
+    //            var scores = fantasyPlayer.scores;
+    //            var points = 0;
+    //            for (var i in scores) {
+    //                points += scores[i];
+    //            }
+    //            fantasyPlayer.points = points;
+    //        }
+    //
+    //        database.ref("players").set(fantasyPlayers);
+    //    }
+
+    /*function updateAll() {
+     for (var i in fantasyTeams) {
+     var fantasyTeam = fantasyTeams[i];
+     fantasyTeam.matchStates = {};
+     fantasyTeam.playerPoints = {};
+     fantasyTeam.gwPoints = null;
+     var totalPoints = 0;
+     var scoringPlayers = fantasyTeam.scoringPlayers;
+     console.log(fantasyTeam);
+     console.log(scoringPlayers);
+     for (var matchId=1; matchId<=10; matchId++) {
+     var applicableMatchId = 0;
+     for(var mid in scoringPlayers) {
+     var midInt = parseInt(mid);
+     if (midInt>applicableMatchId && midInt<=matchId) {
+     applicableMatchId = midInt;
+     }
+     }
+     console.log("Using " + applicableMatchId + " for " + matchId);
+     var playerList = scoringPlayers[applicableMatchId];
+     for (var k=0; k<playerList.length; k++) {
+     var playerId = playerList[k];
+     var curPlayerPoints = parseInt((fantasyPlayers[playerId].scores && fantasyPlayers[playerId].scores[matchId]) || 0);
+     if (k==0) {
+     curPlayerPoints *= 2;
+     } else if (k==1) {
+     curPlayerPoints *= 1.5;
+     }
+     totalPoints += curPlayerPoints;
+     fantasyTeam.playerPoints[playerId] = fantasyTeam.playerPoints[playerId] || 0;
+     fantasyTeam.playerPoints[playerId] += curPlayerPoints;
+     }
+     fantasyTeam.matchStates[matchId] = totalPoints;
+     }
+     fantasyTeam.points = totalPoints;
+     //console.log(fantasyTeam);
+     }
+     database.ref("fantasyTeams").set(fantasyTeams);
+     }*/
+</script>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script>
+
+        var config = {
+            apiKey: "AIzaSyD6jiFzXv1Bhq9gt_6QrNYzN7-cSTdVwZw",
+            authDomain: "fantasy-league-b5923.firebaseapp.com",
+            databaseURL: "https://fantasy-league-b5923.firebaseio.com",
+            projectId: "fantasy-league-b5923",
+            storageBucket: "fantasy-league-b5923.appspot.com",
+            messagingSenderId: "515207765166"
+        };
+        var teams = {};
+        firebase.initializeApp(config);
+        var database = firebase.database();
+
+        var matches = {};
+        var matchNo = 1;
+
+//        function getMatchData(type) {
+//            console.log(matchNo);
+//            var matchNoString = matchNo + 8191;
+//            var url = '';
+//            $.getJSON( "http://datacdn.iplt20.com/dynamic/data/core/cricket/2012/ipl2020/ipl2020-01/scoring.js", function(data)
+//            {
+//                onScoring(data);
+//            });
+//        }
+
+        function getMatchData() {
+            console.log(matchNo);
+            var matchNoString = matchNo.toString();
+            if (matchNoString.length == 1) {
+                matchNoString = "0" + "" + matchNoString;
+            }
+            var head = document.getElementsByTagName("head")[0];
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.async = true;
+            script.src = "http://datacdn.iplt20.com/dynamic/data/core/cricket/2012/ipl2020/ipl2020-" + matchNoString + "/scoring.js";
+            document.getElementsByTagName('head')[0].appendChild(script);
+        }
+
+        function setTeam(team) {
+            teams[team.id] = {
+                id: team.id,
+                fullName: team.fullName,
+                shortName: team.abbreviation
+            };
+        }
+
+        function onScoring(json) {
+            var matchInfo = json.matchInfo;
+            setTeam(matchInfo.teams[0].team);
+            setTeam(matchInfo.teams[1].team);
+            matches[matchNo.toString()] = {
+                id: matchNo,
+                startTime: matchInfo.matchDate,
+                team1Id: matchInfo.teams[0].team.id,
+                team2Id: matchInfo.teams[1].team.id,
+                totalPointsScored: 0,
+                tournamentId: 1
+            };
+            matchNo++;
+            if (matchNo <= 56) {
+                getMatchData();
+            } else {
+                console.log(teams);
+                database.ref("teams").set(teams);
+                for (var i = 1; i <= 56; i++) {
+                    console.log(matches[i]);
+                    database.ref("matches/" + i).set(matches[i.toString()]);
+                }
+            }
+        }
+
+        getMatchData();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

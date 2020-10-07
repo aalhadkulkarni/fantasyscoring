@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Correction</title>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyD6jiFzXv1Bhq9gt_6QrNYzN7-cSTdVwZw",
+            authDomain: "fantasy-league-b5923.firebaseapp.com",
+            databaseURL: "https://fantasy-league-b5923.firebaseio.com",
+            projectId: "fantasy-league-b5923",
+            storageBucket: "fantasy-league-b5923.appspot.com",
+            messagingSenderId: "515207765166"
+        };
+        firebase.initializeApp(config);
+        var database = firebase.database();
+    </script>
+</head>
+<body>
+
+<script>
+
+    var playerPoints = [];
+    function getPlayers() {
+        database.ref('players')
+                .once('value')
+                .then(function (data) {
+                    var players = data.val();
+                    for(var i in players) {
+                        var player = players[i];
+                        if (player.scores) {
+                            var matches = 0;
+                            for (var i in player.scores) {
+                                matches++;
+                            }
+                            playerPoints.push({
+                                "name": player.name,
+                                "points": player.points,
+                                "matches": matches
+                            });
+                        }
+                    }
+                    playerPoints.sort(function (a, b) {
+                        return b.points - a.points;
+                    });
+                    for (var i = 0; i < playerPoints.length; i++) {
+                        console.log(playerPoints[i].name + ": " + playerPoints[i].points + " (" + playerPoints[i].matches + " matches)");
+                    }
+                });
+    }
+
+    getPlayers();
+</script>
+
+</body>
+</html>
