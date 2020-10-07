@@ -493,6 +493,7 @@
                     var m = data.val();
                     $("#matches").val(m);
                     $(".control").show();
+                    $("#wait").hide();
                 });
     }
 </script>
@@ -502,6 +503,10 @@
 </select>
 
 <button onclick="getMatchData()" class = "control">Calculate and display scores</button>
+
+<div id="wait">
+    Please wait. System is fetching data
+</div>
 
 <script>
     $(".control").hide();
