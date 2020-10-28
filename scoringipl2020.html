@@ -192,6 +192,9 @@
 
                 console.log(playerId);
                 console.log(fantasyPlayers[playerId]);
+                if (fantasyPlayers[playerId] === undefined) {
+                    continue;
+                }
                 //runs
                 battingPoints += runs;
                 var runsBonus = 0;
