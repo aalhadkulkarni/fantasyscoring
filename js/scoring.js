@@ -149,6 +149,8 @@ var rules = {
 };
 
 function applyBasicRule(rule, value) {
+    value = parseFloat(value);
+    rule.basic = parseFloat(rule.basic);
     return value * rule.basic;
 }
 
@@ -169,17 +171,18 @@ function isApplicable(range, value, reverse) {
 }
 
 function applyRangeRule(rule, value, role, notOut, reverse) {
+    value = parseFloat(value);
     var ranges = rule.ranges;
     for (var i = 0; i < ranges.length; i++) {
         var range = ranges[i];
-        if (isApplicable(rule, value, reverse)) {
-            if (range.onlyOnOut && !notOut) {
+        if (isApplicable(range, value, reverse)) {
+            if (range.onlyOnOut && notOut) {
                 continue;
             }
             if (role && range.excludedRoles && range.excludedRoles[role]) {
                 continue;
             }
-            return ranges.points;
+            return range.points;
         }
     }
     return 0;
