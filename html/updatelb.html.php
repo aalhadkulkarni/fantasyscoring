@@ -17,6 +17,11 @@
 <script>
     window.scoringReady = function () {
         getMatchData(matchNo);
+    };
+
+    function calculateButtonClicked() {
+        $("#calc").hide();
+        calculateAndDisplayScores();
     }
 </script>
 
@@ -33,7 +38,7 @@
     <option value disabled selected>Select Winning Team</option>
 </select>
 
-<button onclick="calculateAndDisplayScores()" class = "control">Calculate and display scores</button>
+<button onclick="calculateButtonClicked()" id = "calc" class = "control">Calculate and display scores</button>
 
 <button onclick="updateScoresInDb()" class = "control">Save scores in db</button>
 
