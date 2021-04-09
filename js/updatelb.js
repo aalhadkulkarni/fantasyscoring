@@ -53,7 +53,7 @@ function updateScoresInDb() {
     console.log(fantasyPlayers);
     console.log(fantasyTeams);
 
-    database.ref("matches/" + matchNo + "/totalPointsScored").set(jackpotScore+100);
+    database.ref("matches/" + matchNo + "/totalPointsScored").set(jackpotScore);
 
     database.ref("players").set(fantasyPlayers);
 
