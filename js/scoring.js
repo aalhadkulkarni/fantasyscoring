@@ -341,10 +341,10 @@ function MatchResultScoring(teamId, winningTeamId) {
     function addPointsForWinLoss() {
         var winLossPoints = 0;
         if (teamId == winningTeamId) {
-            winLossPoints += rules.winningTeam;
+            winLossPoints = rules.winningTeam;
             descriptions.push("Winning team - Points: " + winLossPoints);
-        } else if (teamId == losingTeamId) {
-            winLossPoints -= rules.losingTeam;
+        } else if (winningTeamId && teamId != winningTeamId) {
+            winLossPoints = rules.losingTeam;
             descriptions.push("Losing team - Points: " + winLossPoints);
         }
         points += winLossPoints;
@@ -450,12 +450,14 @@ function calculateScores() {
         addDescriptions(playerId, fieldingResult.descriptions);
     }
 
+    console.log("HERE1");
+    console.log(playerScores);
     //winning or losing team
     for(var playerId in playerScores) {
         var teamId = playerTeams[playerId];
         var matchResultScoring = new MatchResultScoring(teamId, winningTeamId);
         var matchResultResult = matchResultScoring.getResult();
-        playerScores[playerId].points += matchResultResult.points;
+        playerScores[playerId] += matchResultResult.points;
         addDescriptions(playerId, matchResultResult.descriptions);
     }
 
