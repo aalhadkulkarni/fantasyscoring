@@ -48,7 +48,7 @@ function calculateAndDisplayScores() {
     database.ref("rules")
         .once("value")
         .then(function (data) {
-            rules = data.val;
+            rules = data.val();
             calculateScores();
             displayScores();
         });
@@ -152,7 +152,7 @@ function applyBasicRule(rule, value) {
     return value * rule.basic;
 }
 
-function isApplicable(rule, value, reverse) {
+function isApplicable(range, value, reverse) {
     if (reverse) {
         if ((value <= range.to && (range.from === undefined || value > range.to))) {
             return true;
@@ -161,7 +161,7 @@ function isApplicable(rule, value, reverse) {
             return true;
         }
     } else {
-        if (value >= ranges.from && (range.to === undefined || value < ranges.to)) {
+        if (value >= range.from && (range.to === undefined || value < range.to)) {
             return true;
         }
     }
@@ -202,7 +202,7 @@ function BattingScoring(runs, balls, sr, boundaries, notOut, role) {
     }
 
     function addPointsForSr() {
-        var srBonus = applyRangeRule(roles.sr, sr, role, notOut);
+        var srBonus = applyRangeRule(rules.sr, sr, role, notOut);
         if (srBonus != 0) {
             descriptions.push("Batting Strike Rate: " + sr + " - Points: " + srBonus);
         }
@@ -278,7 +278,7 @@ function BowlingScoring(wickets, dots, maidens, economy) {
     }
 
     function addPointsForMaidens() {
-        var maidensBonus = applyBasicRule(rule.maidens, maidens);
+        var maidensBonus = applyBasicRule(rules.maidens, maidens);
         if (maidensBonus > 0) {
             descriptions.push("Maidens: " + maidens + " - Points: " + (maidensBonus));
         }
@@ -286,7 +286,7 @@ function BowlingScoring(wickets, dots, maidens, economy) {
     }
 
     function addPointsForEconomy() {
-        var eBonus = applyRangeRule(rule.economy, economy, null, false, true);
+        var eBonus = applyRangeRule(rules.economy, economy, null, false, true);
 
         if (eBonus != 0) {
             descriptions.push("Economy: " + economy + " - Points: " + eBonus);
