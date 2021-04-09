@@ -14,6 +14,7 @@
 <body>
 
 <script>
+    var iplTeams = {};
     window.matchDataReady = function () {
         calculateAndDisplayScores();
     };
@@ -51,6 +52,7 @@
     }
 
     function matchSelected() {
+        $("#calc").hide();
         getMatchData($("#matches").val());
     }
 
@@ -60,7 +62,7 @@
     <option value disabled selected>Select match</option>
 </select>
 
-<button onclick="matchSelected()" class = "control">Calculate and display scores</button>
+<button onclick="matchSelected()" class = "control" id="calc">Calculate and display scores</button>
 
 <div id="wait">
     Please wait. System is fetching data
