@@ -45,8 +45,13 @@ function getMiscData() {
 
 function calculateAndDisplayScores() {
     getMiscData();
-    calculateScores();
-    displayScores();
+    database.ref("rules")
+        .once("value")
+        .then(function (data) {
+            rules = data.val;
+            calculateScores();
+            displayScores();
+        });
 }
 
 function printPlayerScore(playerId) {
@@ -75,26 +80,116 @@ function displayScores() {
     document.body.appendChild(p);
 }
 
+var rules = {
+    runs: {
+        basic: 0,
+        ranges: [{
+            from: -1,
+            to: -1,
+            points: 0,
+            onlyOnOut: false,
+            excludedRoles: []
+        }]
+    },
+    sr: {
+        ranges: [{
+            from: -1,
+            to: -1,
+            points: 0,
+            onlyOnOut: false,
+            excludedRoles: []
+        }]
+    },
+    boundaries: {
+        ranges: [{
+            from: -1,
+            to: -1,
+            points: 0,
+            onlyOnOut: false,
+            excludedRoles: []
+        }]
+    },
+    notOutPoints: 0,
+    wickets: {
+        basic: 0,
+        ranges: [{
+            from: -1,
+            to: -1,
+            points: 0,
+            onlyOnOut: false,
+            excludedRoles: []
+        }]
+    },
+    maidens: {
+        basic: 0
+    },
+    economy: {
+        ranges: [{
+            from: -1,
+            to: -1,
+            points: 0,
+            onlyOnOut: false,
+            excludedRoles: []
+        }]
+    },
+    fielding: {
+        basic: 0,
+        ranges: [{
+            from: -1,
+            to: -1,
+            points: 0,
+            onlyOnOut: false,
+            excludedRoles: []
+        }]
+    },
+    winningTeam: 0,
+    losingTeam: 0,
+    MoM: 0,
+    hattrick: 0
+};
+
+function applyBasicRule(rule, value) {
+    return value * rule.basic;
+}
+
+function isApplicable(rule, value, reverse) {
+    if (reverse) {
+        if ((value <= range.to && (range.from === undefined || value > range.to))) {
+            return true;
+        }
+        if (value > range.from && range.to === undefined) {
+            return true;
+        }
+    } else {
+        if (value >= ranges.from && (range.to === undefined || value < ranges.to)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function applyRangeRule(rule, value, role, notOut, reverse) {
+    var ranges = rule.ranges;
+    for (var i = 0; i < ranges.length; i++) {
+        var range = ranges[i];
+        if (isApplicable(rule, value, reverse)) {
+            if (range.onlyOnOut && !notOut) {
+                continue;
+            }
+            if (role && range.excludedRoles && range.excludedRoles[role]) {
+                continue;
+            }
+            return ranges.points;
+        }
+    }
+    return 0;
+}
+
 function BattingScoring(runs, balls, sr, boundaries, notOut, role) {
     var points = 0, descriptions = [];
     function addPointsForRuns() {
-        var runsBasicPoints = runs;
-        var runsBonus = 0;
-        if (runs>=25 && runs<50) {
-            runsBonus = 10;
-        } else if (runs>=50 && runs<75) {
-            runsBonus = 25;
-        } else if (runs>=75 && runs<100) {
-            runsBonus = 40;
-        } else if (runs>=100 && runs<150) {
-            runsBonus = 100;
-        } else if (runs>=150) {
-            runsBonus = 125;
-        } else if (runs == 0 && !notOut && role != "Bowler") {
-            runsBonus = -25;
-        } else if (runs<=5 && !notOut && role != "Bowler") {
-            runsBonus = -10;
-        }
+        var runsBasicPoints = applyBasicRule(rules.runs, runs);
+        var runsBonus = applyRangeRule(rules.runs, runs, role, notOut);
 
         var runsPoints = runsBasicPoints + runsBonus;
 
@@ -107,16 +202,7 @@ function BattingScoring(runs, balls, sr, boundaries, notOut, role) {
     }
 
     function addPointsForSr() {
-        var srBonus = 0;
-        if (sr>=100 && sr<125) {
-            srBonus = 10;
-        } else if (sr>=125 && sr<200) {
-            srBonus = 20;
-        } else if (sr>=200) {
-            srBonus = 30;
-        } else if (sr<=50 && !notOut) {
-            srBonus = -15;
-        }
+        var srBonus = applyRangeRule(roles.sr, sr, role, notOut);
         if (srBonus != 0) {
             descriptions.push("Batting Strike Rate: " + sr + " - Points: " + srBonus);
         }
@@ -124,14 +210,7 @@ function BattingScoring(runs, balls, sr, boundaries, notOut, role) {
     }
 
     function addPointsForBoundaries() {
-        var bBonus = 0;
-        if (boundaries>=5 && boundaries<10) {
-            bBonus = 10;
-        } else if (boundaries>=10 && boundaries<15) {
-            bBonus = 20;
-        } else if (boundaries>=15) {
-            bBonus = 30;
-        }
+        var bBonus = applyRangeRule(rules.boundaries, boundaries);
         if (bBonus != 0) {
             descriptions.push("Fours and Sixes: " + boundaries + " - Points: " + bBonus);
         }
@@ -141,7 +220,7 @@ function BattingScoring(runs, balls, sr, boundaries, notOut, role) {
     function addPointsForNotOut() {
         var notOutPoints = 0;
         if (notOut) {
-            notOutPoints += 15;
+            notOutPoints += rules.notOutPoints;
             descriptions.push("Not Out - Points: " + notOutPoints);
         }
         points += notOutPoints;
@@ -169,19 +248,8 @@ function BowlingScoring(wickets, dots, maidens, economy) {
     var points = 0, descriptions = [];
 
     function addPointsForWickets() {
-        var wicketsBasicPoints = 30*wickets;
-        var wBonus = 0;
-        if (wickets==2) {
-            wBonus = 15;
-        } else if (wickets==3) {
-            wBonus = 25;
-        } else if (wickets==4) {
-            wBonus = 50;
-        } else if (wickets >= 5) {
-            wBonus = 100;
-        } else if (wickets == 0) {
-            wBonus = -20;
-        }
+        var wicketsBasicPoints = applyBasicRule(rules.wickets, wickets);
+        var wBonus = applyRangeRule(rules.wickets, wickets);
 
         var wicketsPoints = wicketsBasicPoints + wBonus;
 
@@ -195,12 +263,8 @@ function BowlingScoring(wickets, dots, maidens, economy) {
     }
 
     function addPointsForDots() {
-        var dotsBonus = 0, dotsBasicPoints = (dots * 1.5);
-        if (dots>=10 && dots<15) {
-            dotsBonus = 20;
-        } else if (dots>=15) {
-            dotsBonus = 30;
-        }
+        var dotsBasicPoints = applyBasicRule(rules.dots, dots),
+            dotsBonus = applyRangeRule(rules.dots, dots);
 
         var dotsPoints = dotsBasicPoints + dotsBonus;
 
@@ -214,7 +278,7 @@ function BowlingScoring(wickets, dots, maidens, economy) {
     }
 
     function addPointsForMaidens() {
-        var maidensBonus = (20*maidens);
+        var maidensBonus = applyBasicRule(rule.maidens, maidens);
         if (maidensBonus > 0) {
             descriptions.push("Maidens: " + maidens + " - Points: " + (maidensBonus));
         }
@@ -222,20 +286,7 @@ function BowlingScoring(wickets, dots, maidens, economy) {
     }
 
     function addPointsForEconomy() {
-        var eBonus = 0;
-        if (economy<=4) {
-            eBonus = 25;
-        } else if (economy<=4) {
-            eBonus = 30;
-        } else if(economy>4 && economy<=7) {
-            eBonus = 20;
-        } else if(economy>=8 && economy<10) {
-            eBonus = -10;
-        } else if(economy>=10 && economy<12) {
-            eBonus = -15;
-        } else if(economy>=12) {
-            eBonus = -20;
-        }
+        var eBonus = applyRangeRule(rule.economy, economy, null, false, true);
 
         if (eBonus != 0) {
             descriptions.push("Economy: " + economy + " - Points: " + eBonus);
@@ -259,13 +310,11 @@ function BowlingScoring(wickets, dots, maidens, economy) {
 function FieldingScoring(fieldingCount) {
     var points = 0, descriptions = [];
     function addPointsForFielding() {
-        var fieldingBasicPoints = 0;
-        var fBonus = 0;
-        fieldingBasicPoints += (20*fieldingCount);
-        if (fieldingCount>=3) {
-            fBonus = 20;
-        }
+        var fieldingBasicPoints = applyBasicRule(rules.fielding, fieldingCount),
+            fBonus = applyRangeRule(rules.fielding, fieldingCount);
+
         var fieldingPoints = fieldingBasicPoints + fBonus;
+
         if (fieldingPoints != 0) {
             if (fBonus != 0) {
                 descriptions.push("Catches / Run Outs / Stumpings: " + fieldingCount + " - Points: " + (fieldingPoints) + " (" + (fieldingBasicPoints) + " + " + fBonus + ")");
@@ -289,10 +338,10 @@ function MatchResultScoring(teamId, winningTeamId) {
     function addPointsForWinLoss() {
         var winLossPoints = 0;
         if (teamId == winningTeamId) {
-            winLossPoints += 15;
+            winLossPoints += rules.winningTeam;
             descriptions.push("Winning team - Points: " + winLossPoints);
         } else if (teamId == losingTeamId) {
-            winLossPoints -= 15;
+            winLossPoints -= rules.losingTeam;
             descriptions.push("Losing team - Points: " + winLossPoints);
         }
         points += winLossPoints;
@@ -310,7 +359,7 @@ function MatchResultScoring(teamId, winningTeamId) {
 function MoMScoring() {
     var points = 0, descriptions = [];
     function addPointsForMoM() {
-        points = 100;
+        points = rules.MoM;
         descriptions.push("Man of the Match - Points: 100");
     }
 
@@ -326,7 +375,7 @@ function MoMScoring() {
 function HattrickScoring() {
     var points = 0, descriptions = [];
     function addPointsForHattrick() {
-        points = 200;
+        points = rules.hattrick;
         descriptions.push("Hattrick - Points: 200");
     }
 
