@@ -2,12 +2,9 @@
 /**
  * Created by PhpStorm.
  * User: aalhadk
- * Date: 2/4/21
- * Time: 2:50 AM
+ * Date: 9/4/21
+ * Time: 7:13 AM
  */
 
 include_once "authenticate.php";
-
-?>
-
-<a href="updateLB.php">Open update LB page</a>
+include_once "html/updatelb.html.php";

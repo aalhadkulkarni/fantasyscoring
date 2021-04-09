@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: aalhadk
- * Date: 5/4/17
- * Time: 10:00 PM
+ * Date: 9/4/21
+ * Time: 7:30 AM
  */
 
-echo file_get_contents("html/liveScoring.html");
+include_once "html/liveScoring.html.php";
