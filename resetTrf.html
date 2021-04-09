@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <script src="js/firebaseinit.js"></script>
+</head>
+<body>
+
+<script>
+    database.ref("fantasyTeams")
+            .once("value")
+            .then(function (data) {
+                var fantasyTeams = data.val();
+                console.log(fantasyTeams);
+                for (var i in fantasyTeams) {
+                    if (fantasyTeams[i].leagueId == 1) {
+                        fantasyTeams[i].transfersRemaining = 11;
+                        fantasyTeams[i].ccRemaining = 11;
+                        fantasyTeams[i].vccRemaining = 11;
+                        console.log(fantasyTeams[i]);
+                    }
+                }
+                database.ref("fantasyTeams").set(fantasyTeams);
+            })
+</script>
+
+</body>
+</html>
