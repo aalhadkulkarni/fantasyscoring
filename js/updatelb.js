@@ -43,6 +43,7 @@ function processFantasyLeagueScores() {
         }
         fantasyPlayers[playerId].scores = fantasyPlayers[playerId].scores || {};
         fantasyPlayers[playerId].scores[matchNo] = playerScores[playerId];
+        fantasyPlayers[playerId].points = fantasyPlayers[playerId].points || 0;
         fantasyPlayers[playerId].points += playerScores[playerId];
     }
 }
