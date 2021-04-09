@@ -498,7 +498,7 @@ function getMatchData(matchId) {
     var script = document.createElement('script');
     script.type = 'text/javascript';
     script.async = true;
-    script.src = "https://datacdn.iplt20.com/dynamic/data/core/cricket/2012/ipl2020/ipl2020-" + matchNoString + "/scoring.js";
+    script.src = "https://datacdn.iplt20.com/dynamic/data/core/cricket/2012/ipl2021/ipl2021-" + matchNoString + "/scoring.js";
     document.getElementsByTagName('head')[0].appendChild(script);
 }
 
