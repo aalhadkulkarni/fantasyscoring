@@ -7,3 +7,24 @@ var config = {
 };
 firebase.initializeApp(config);
 var database = firebase.database();
+
+function getMultiDataFromFirebase(fields, windowVariables, callback) {
+    var promises = [];
+    for (var i = 0; i < fields.length; i++) {
+        promises.push(getPromiseFor(fields[i]));
+    }
+    Promise.all(promises)
+        .then(function (data) {
+            for (var i = 0; i < data.length; i++) {
+                console.log(data[i].val());
+                window[windowVariables[i]] = data[i].val();
+            }
+            callback && callback();
+        });
+
+}
+
+function getPromiseFor(field) {
+    console.log(field);
+    return database.ref(field).once("value");
+}
