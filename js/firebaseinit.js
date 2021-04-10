@@ -8,23 +8,22 @@ var config = {
 firebase.initializeApp(config);
 var database = firebase.database();
 
-function getMultiDataFromFirebase(fields, windowVariables, callback) {
+function getMultiDataFromFirebase(fields, callback) {
     var promises = [];
     for (var i = 0; i < fields.length; i++) {
         promises.push(getPromiseFor(fields[i]));
     }
     Promise.all(promises)
         .then(function (data) {
+            var returnValues = [];
             for (var i = 0; i < data.length; i++) {
-                console.log(data[i].val());
-                window[windowVariables[i]] = data[i].val();
+                returnValues.push(data[i].val());
             }
-            callback && callback();
+            callback.apply(null, returnValues)
         });
 
 }
 
 function getPromiseFor(field) {
-    console.log(field);
     return database.ref(field).once("value");
 }
