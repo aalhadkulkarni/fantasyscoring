@@ -156,16 +156,18 @@ function applyBasicRule(rule, value) {
 
 function isApplicable(range, value, reverse) {
     if (reverse) {
-        if ((value <= range.to && (range.from === undefined || value > range.to))) {
-            return true;
+        if (range.to === undefined) {
+            return value > range.from;
         }
-        if (value > range.from && range.to === undefined) {
-            return true;
+        if (range.from === undefined) {
+            return value <= range.to;
         }
+        return value > range.from && value <= range.to;
     } else {
-        if (value >= range.from && (range.to === undefined || value < range.to)) {
-            return true;
+        if (range.to === undefined) {
+            return value >= range.from;
         }
+        return value >= range.from && value < range.to;
     }
     return false;
 }
