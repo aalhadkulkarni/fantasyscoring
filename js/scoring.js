@@ -205,7 +205,7 @@ function BattingScoring(runs, balls, sr, boundaries, notOut, role) {
     }
 
     function addPointsForSr() {
-        var srBonus = applyRangeRule(rules.sr, sr, role, notOut);
+        var srBonus = applyRangeRule(rules.sr, sr, role, notOut || (runs == 0 && !notOut));
         if (srBonus != 0) {
             descriptions.push("Batting Strike Rate: " + sr + " - Points: " + srBonus);
         }
