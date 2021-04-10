@@ -174,17 +174,19 @@ function isApplicable(range, value, reverse) {
 
 function applyRangeRule(rule, value, role, notOut, reverse) {
     value = parseFloat(value);
-    var ranges = rule.ranges;
-    for (var i = 0; i < ranges.length; i++) {
-        var range = ranges[i];
-        if (isApplicable(range, value, reverse)) {
-            if (range.onlyOnOut && notOut) {
-                continue;
+    if (!isNaN(value)) {
+        var ranges = rule.ranges;
+        for (var i = 0; i < ranges.length; i++) {
+            var range = ranges[i];
+            if (isApplicable(range, value, reverse)) {
+                if (range.onlyOnOut && notOut) {
+                    continue;
+                }
+                if (role && range.excludedRoles && range.excludedRoles[role]) {
+                    continue;
+                }
+                return range.points;
             }
-            if (role && range.excludedRoles && range.excludedRoles[role]) {
-                continue;
-            }
-            return range.points;
         }
     }
     return 0;
@@ -404,7 +406,7 @@ function calculateScores() {
             var playerId = battingStat.playerId;
             var balls = battingStat.b || 0;
             var runs = battingStat.r || 0;
-            var sr = battingStat.sr || 0;
+            var sr = battingStat.sr;
             var boundaries = (battingStat["4s"] || 0) + (battingStat["6s"] || 0);
             var mod = battingStat.mod;
             var notOut = (mod == undefined) || (mod.out === false);
