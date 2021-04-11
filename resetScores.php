@@ -45,7 +45,9 @@
         database.ref("matches").set(matches);
     }
 
-    getMultiDataFromFirebase(["fantasyTeams", "players", "matches"], resetScores);
+    if (confirm("Are you sure you want to reset scores?")) {
+        getMultiDataFromFirebase(["fantasyTeams", "players", "matches"], resetScores);
+    }
 
 </script>
 
