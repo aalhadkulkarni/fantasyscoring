@@ -11,7 +11,14 @@ function processFantasyLeagueScores() {
         for(var matchId in scoringPlayers) {
             var mid = parseInt(matchId);
             if (mid>applicableMatchId && mid<=matchNo) {
-                applicableMatchId = mid;
+                if (fantasyTeam.leagueId == 2 && matchNo <=56) {
+                    var curGwM1 = (matchNo - matchNo % 8) + 1;
+                    if (curGwM1 > matchNo) {
+                        curGwM1 -= 8;
+                    }
+                } else {
+                    applicableMatchId = mid;
+                }
             }
         }
         console.log(applicableMatchId);
