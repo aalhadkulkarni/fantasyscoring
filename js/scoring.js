@@ -383,7 +383,8 @@ function HattrickScoring() {
     var points = 0, descriptions = [];
     function addPointsForHattrick() {
         points = rules.hattrick;
-        descriptions.push("Hattrick - Points: 200");
+        console.log("POINTS", points);
+        descriptions.push("Hattrick - Points: " + points);
     }
 
     this.getResult = function () {
@@ -496,16 +497,22 @@ function setTeamsAndPlayers() {
 
 function getMatchData(matchId) {
     console.log(matchId);
-    var matchNoString = matchId.toString();
-    if (matchNoString.length == 1) {
-        matchNoString = "0" + "" + matchNoString;
-    }
-    var head = document.getElementsByTagName("head")[0];
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.async = true;
-    script.src = "https://datacdn.iplt20.com/dynamic/data/core/cricket/2012/ipl2021/ipl2021-" + matchNoString + "/scoring.js";
-    document.getElementsByTagName('head')[0].appendChild(script);
+    // var matchNoString = matchId.toString();
+    // if (matchNoString.length == 1) {
+    //     matchNoString = "0" + "" + matchNoString;
+    // }
+    // var head = document.getElementsByTagName("head")[0];
+    // var script = document.createElement('script');
+    // script.type = 'text/javascript';
+    // script.async = true;
+    // script.src = "https://datacdn.iplt20.com/dynamic/data/core/cricket/2012/ipl2021/ipl2021-" + matchNoString + "/scoring.js";
+    // document.getElementsByTagName('head')[0].appendChild(script);
+    //
+    let matchNoString = 32212;
+    matchNoString += (matchId - 30);
+    $.get("https://cricketapi.platform.iplt20.com//fixtures/" + matchNoString + "/scoring").done(function (data) {
+        onScoring(data);
+    });
 }
 
 getFirebaseData();

@@ -48,7 +48,7 @@ function processFantasyLeagueScores() {
     }
 
     for(var playerId in playerScores) {
-        if (!fantasyPlayers[playerId]) {
+        if (!fantasyPlayers[playerId] || !fantasyPlayers[playerId].name) {
             continue;
         }
         fantasyPlayers[playerId].scores = fantasyPlayers[playerId].scores || {};
@@ -66,7 +66,14 @@ function updateScoresInDb() {
 
     database.ref("matches/" + matchNo + "/totalPointsScored").set(jackpotScore);
 
-    database.ref("players").set(fantasyPlayers);
+    let filteredPlayers = {};
+    for (let id in fantasyPlayers) {
+        if (fantasyPlayers[id] && fantasyPlayers[id].id == id) {
+            filteredPlayers[id] = fantasyPlayers[id];
+        }
+    }
+    console.log(filteredPlayers);
+    database.ref("players").set(filteredPlayers);
 
     database.ref("fantasyTeams").set(fantasyTeams);
 
