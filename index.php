@@ -10,4 +10,8 @@ include_once "authenticate.php";
 
 ?>
 
-<a href="updateLB.php">Open update LB page</a>
+<a href="updateLB.php">Update LB</a>
+<br/>
+<a href="newTournament.php">Start a new tournament</a>
+<br/>
+<a href="updatePlayers.php">Update players</a>
