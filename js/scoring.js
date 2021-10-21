@@ -89,7 +89,8 @@ var rules = {
             points: 0,
             onlyOnOut: false,
             excludedRoles: []
-        }]
+        }],
+        srBasedBonus: true
     },
     sr: {
         ranges: [{
@@ -98,7 +99,8 @@ var rules = {
             points: 0,
             onlyOnOut: false,
             excludedRoles: []
-        }]
+        }],
+        inactive: 1
     },
     boundaries: {
         ranges: [{
@@ -173,19 +175,21 @@ function isApplicable(range, value, reverse) {
 }
 
 function applyRangeRule(rule, value, role, notOut, reverse) {
-    value = parseFloat(value);
-    if (!isNaN(value)) {
-        var ranges = rule.ranges;
-        for (var i = 0; i < ranges.length; i++) {
-            var range = ranges[i];
-            if (isApplicable(range, value, reverse)) {
-                if (range.onlyOnOut && notOut) {
-                    continue;
+    if (!rule.inactive) {
+        value = parseFloat(value);
+        if (!isNaN(value)) {
+            var ranges = rule.ranges;
+            for (var i = 0; i < ranges.length; i++) {
+                var range = ranges[i];
+                if (isApplicable(range, value, reverse)) {
+                    if (range.onlyOnOut && notOut) {
+                        continue;
+                    }
+                    if (role && range.excludedRoles && range.excludedRoles[role]) {
+                        continue;
+                    }
+                    return range.points;
                 }
-                if (role && range.excludedRoles && range.excludedRoles[role]) {
-                    continue;
-                }
-                return range.points;
             }
         }
     }
