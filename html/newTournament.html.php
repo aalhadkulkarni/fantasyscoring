@@ -46,21 +46,21 @@
         });
     }
 
-    function processMatchData(matchId, match) {
+    function processMatchData(scoringId, match) {
         let matchInfo = match.matchInfo,
             matchDate = matchInfo.matchDate,
             teams = matchInfo.teams;
         addTeam(teams[0].team);
         addTeam(teams[1].team);
 
-        matchId = matchId - startMatchId + 1;
+        let matchId = scoringId - startMatchId + 1;
         matches[matchId] = {
             id: matchId,
             startTime: matchDate,
             team1Id: teams[0].team.id,
             team2Id: teams[1].team.id,
             tournamentId: 1,
-            scoringId: matchId,
+            scoringId: scoringId,
         };
         done++;
 

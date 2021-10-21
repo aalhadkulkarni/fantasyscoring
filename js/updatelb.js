@@ -2,7 +2,7 @@ function processFantasyLeagueScores() {
     for (var fantasyTeamId in fantasyTeams) {
         var fantasyTeam = fantasyTeams[fantasyTeamId];
         var prevmatch = matchNo - 1;
-        if (prevmatch % 8 == 0 || prevmatch > 56) {
+        if (prevmatch % 5 == 0) {
             fantasyTeam.gwScore = 0;
         }
         fantasyTeam.playerPoints = fantasyTeam.playerPoints || {};
@@ -11,7 +11,7 @@ function processFantasyLeagueScores() {
         for(var matchId in scoringPlayers) {
             var mid = parseInt(matchId);
             if (mid>applicableMatchId && mid<=matchNo) {
-                if (fantasyTeam.leagueId == 2 && matchNo <=56) {
+                if (fantasyTeam.leagueId == 2 && matchNo <= 56) {
                     var curGwM1 = (matchNo - matchNo % 8) + 1;
                     if (curGwM1 > matchNo) {
                         curGwM1 -= 8;
@@ -38,10 +38,14 @@ function processFantasyLeagueScores() {
             } else if (i==1) {
                 curPlayerPoints *= 1.5;
             }
+            curPlayerPoints = round(curPlayerPoints);
             fantasyTeam.playerPoints[curPlayerId] = fantasyTeam.playerPoints[curPlayerId] || 0;
             fantasyTeam.playerPoints[curPlayerId] += curPlayerPoints;
+            fantasyTeam.playerPoints[curPlayerId] = round(fantasyTeam.playerPoints[curPlayerId]);
             fantasyTeam.points += curPlayerPoints;
+            fantasyTeam.points = round(fantasyTeam.points);
             fantasyTeam.gwScore += curPlayerPoints;
+            fantasyTeam.gwScore = round(fantasyTeam.gwScore);
         }
         fantasyTeam.matchStates = fantasyTeam.matchStates || {};
         fantasyTeam.matchStates[matchNo] = fantasyTeam.points
@@ -51,10 +55,12 @@ function processFantasyLeagueScores() {
         if (!fantasyPlayers[playerId] || !fantasyPlayers[playerId].name) {
             continue;
         }
+        playerScores[playerId] = round(playerScores[playerId]);
         fantasyPlayers[playerId].scores = fantasyPlayers[playerId].scores || {};
         fantasyPlayers[playerId].scores[matchNo] = playerScores[playerId];
         fantasyPlayers[playerId].points = fantasyPlayers[playerId].points || 0;
         fantasyPlayers[playerId].points += playerScores[playerId];
+        fantasyPlayers[playerId].points = round(fantasyPlayers[playerId].points);
     }
 }
 

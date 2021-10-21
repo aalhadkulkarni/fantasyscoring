@@ -12,6 +12,7 @@ var jackpotScore = 0;
 var scoringDetails = {};
 var MoMId = null;
 var hattrickId = null;
+var matchFromDB = {};
 
 window.matchDataReady = function () {
     $(".control").show();
@@ -74,6 +75,7 @@ function displayScores() {
         printPlayerScore(playerId);
         jackpotScore += playerScores[playerId];
     }
+    jackpotScore = round(jackpotScore);
     console.log("JP: " + jackpotScore);
     var p = document.createElement("p");
     p.innerHTML = "JP score: " + (jackpotScore) + "<br>";
@@ -90,7 +92,7 @@ var rules = {
             onlyOnOut: false,
             excludedRoles: []
         }],
-        srBasedBonus: true
+        multipliers: {}
     },
     sr: {
         ranges: [{
@@ -150,10 +152,20 @@ var rules = {
     hattrick: 0
 };
 
-function applyBasicRule(rule, value) {
+function applyBasicRule(rule, value, multipliers) {
     value = parseFloat(value);
     rule.basic = parseFloat(rule.basic);
-    return value * rule.basic;
+    let basic = value * rule.basic;
+    multipliers = multipliers || {};
+    rule.multipliers = rule.multipliers || [];
+    for (let i = 0; i < rule.multipliers.length; i++) {
+        let multiplier = rule.multipliers[i];
+        if (!isNaN(multipliers[multiplier])) {
+            basic *= multipliers[multiplier];
+        }
+    }
+    basic = round(basic);
+    return basic;
 }
 
 function isApplicable(range, value, reverse) {
@@ -199,15 +211,17 @@ function applyRangeRule(rule, value, role, notOut, reverse) {
 function BattingScoring(runs, balls, sr, boundaries, notOut, role) {
     var points = 0, descriptions = [];
     function addPointsForRuns() {
-        var runsBasicPoints = applyBasicRule(rules.runs, runs);
+        let srMultiplier = round(sr, 4);
+        var runsBasicPoints = applyBasicRule(rules.runs, runs, {
+            sr: srMultiplier
+        });
         var runsBonus = applyRangeRule(rules.runs, runs, role, notOut);
 
         var runsPoints = runsBasicPoints + runsBonus;
 
+        descriptions.push("Runs: " + runs + " - Points: " + (runsBasicPoints) + " (" + runs + " x " + srMultiplier + ")");
         if (runsBonus != 0) {
-            descriptions.push("Runs: " + runs + " - Points: " + (runsPoints) + " (" + runsBasicPoints + " + " + runsBonus + ")");
-        } else {
-            descriptions.push("Runs: " + runs + " - Points: " + runs);
+            descriptions.push("Runs bonus: " + runsBonus);
         }
         points += runsPoints;
     }
@@ -467,6 +481,7 @@ function calculateScores() {
         var matchResultScoring = new MatchResultScoring(teamId, winningTeamId);
         var matchResultResult = matchResultScoring.getResult();
         playerScores[playerId] += matchResultResult.points;
+        playerScores[playerId] = round(playerScores[playerId]);
         addDescriptions(playerId, matchResultResult.descriptions);
     }
 
@@ -474,14 +489,25 @@ function calculateScores() {
         var moMScoring = new MoMScoring();
         var moMResult = moMScoring.getResult();
         playerScores[MoMId] += moMResult.points;
+        playerScores[MoMId] = round(playerScores[MoMId]);
         addDescriptions(MoMId, moMResult.descriptions);
     }
     if (hattrickId) {
         var hattrickScoring = new HattrickScoring();
         var hattrickResult = hattrickScoring.getResult();
         playerScores[hattrickId] += hattrickResult.points;
+        playerScores[hattrickId] = round(playerScores[hattrickId]);
         addDescriptions(hattrickId, hattrickResult.descriptions);
     }
+}
+
+function round(num, digits) {
+    digits = digits || 2;
+    let x = 1;
+    for (let i = 0; i < digits; i++) {
+        x *= 10;
+    }
+    return Math.round(num * 100) / x;
 }
 
 function setTeamsAndPlayers() {
@@ -499,8 +525,8 @@ function setTeamsAndPlayers() {
     }
 }
 
-function getMatchData(matchId) {
-    console.log(matchId);
+function getMatchData(matchNo) {
+    console.log(matchNo);
     // var matchNoString = matchId.toString();
     // if (matchNoString.length == 1) {
     //     matchNoString = "0" + "" + matchNoString;
@@ -512,11 +538,19 @@ function getMatchData(matchId) {
     // script.src = "https://datacdn.iplt20.com/dynamic/data/core/cricket/2012/ipl2021/ipl2021-" + matchNoString + "/scoring.js";
     // document.getElementsByTagName('head')[0].appendChild(script);
     //
-    let matchNoString = 32212;
-    matchNoString += (matchId - 30);
-    $.get("https://cricketapi.platform.iplt20.com//fixtures/" + matchNoString + "/scoring").done(function (data) {
-        onScoring(data);
-    });
+    if (window.location.href.indexOf("testjsrm") !== -1) {
+        getMatchFromId(32212 + parseInt(matchNo) - 1);
+    } else {
+        getMatchFromDB(matchNo, function(matchFromDb) {
+            getMatchFromId(matchFromDb.scoringId);
+        });
+    }
+
+    function getMatchFromId(matchId) {
+        $.get("https://cricketapi.platform.iplt20.com//fixtures/" + matchId + "/scoring").done(function (data) {
+            onScoring(data);
+        });
+    }
 }
 
 getFirebaseData();
@@ -531,6 +565,15 @@ function getNextMatchId() {
         .then(function (data) {
             matchNo = data.val();
             getFantasyTeams();
+        });
+}
+
+function getMatchFromDB(matchId, callback) {
+    database.ref('matches/' + matchId)
+        .once('value')
+        .then(function (data) {
+            matchFromDB = data.val();
+            callback(matchFromDB);
         });
 }
 
