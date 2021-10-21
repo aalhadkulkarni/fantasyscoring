@@ -102,6 +102,9 @@
         let roleSelect = newSelect("role", htmlId, roleOptions);
         let actionButton = newButton("action", htmlId, "Delete");
         actionButton.bind("click", function() {
+            if (!confirm("This player will be permanently deleted from the system. Are you sure you want to proceed?")) {
+                return;
+            }
             deleteRow(htmlId);
         });
 
@@ -190,6 +193,9 @@
     }
 
     function updatePlayers() {
+        if (!confirm("Changes will reflect directly into live fantasy site. Are you sure you want to proceed?")) {
+            return;
+        }
         let globalPlayersNew = {},
             playersNew = {};
         for (let i = 1; i <= rowCount; i++) {
@@ -237,6 +243,8 @@
         database.ref("players_global").set(globalPlayersNew);
         database.ref("teams").set(teams);
         database.ref("teams_global").set(globalTeams);
+
+        alert("Players updated successfully. Please check the fantasy site to verify changes have reflected correctly.");
     }
 
     function addToGlobalTeam(playerId, teamId) {
@@ -282,17 +290,19 @@
         <div class="col-sm-12">
             <div class="panel panel-info">
                 <div class="panel panel-heading">
-                    Enter user name and password
+                    These are all the players in the system <br/>
+                    You can add / edit / delete players <br/>
+                    <h4>Please note that changes will not be saved until you click "Update players" button at the bottom of the page<h4>
                 </div>
                 <div class="panel panel-body">
                     <table class="table table-responsive" id="players">
                         <thead>
                         <tr>
-                            <th>Player Id</th>
-                            <th>Player name</th>
+                            <th>Id</th>
+                            <th>Name</th>
                             <th>IPL Team</th>
-                            <th>International Team</th>
-                            <th>Part of current tournament</th>
+                            <th>Intl Team</th>
+                            <th>Active</th>
                             <th>Role</th>
                             <th>Action</th>
                         </tr>
