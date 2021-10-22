@@ -173,7 +173,8 @@
         <div class="col-sm-6">
             <div class="panel panel-info">
                 <div class="panel panel-heading">
-                    Enter user name and password
+                    Enter tournament data <br/>
+                    <h4>This will overwrite any existing tournament</h4>
                 </div>
                 <div class="panel panel-body">
                     <table class="table table-responsive">
