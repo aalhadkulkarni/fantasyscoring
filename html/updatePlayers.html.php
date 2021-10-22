@@ -224,6 +224,10 @@
                     playerObj.teamId = iplTeam;
                 }
 
+                if (playerObj.teamId === "") {
+                    alert("Please select team for " + name);
+                }
+
                 if (current === "Yes") {
                     playerObj.selected = 1;
 
