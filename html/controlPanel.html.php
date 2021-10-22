@@ -255,8 +255,8 @@
         <div class="col-sm-6">
             <div class="panel panel-info">
                 <div class="panel panel-heading">
-                    Refresh existing tournament <br/>
-                    To get data of new matches - to be performed at the end of each round
+                    Enter number of transfers, cc, vvc <br/>
+                    All teams's transfers will be reset to this number
                 </div>
                 <div class="panel panel-body">
                     <table class="table table-responsive">
