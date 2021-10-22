@@ -108,9 +108,9 @@
         done++;
 
         if (done === matchCount) {
+            alert("New tournament added");
             finish();
         }
-        alert("New tournament added");
     }
 
     function finish() {
