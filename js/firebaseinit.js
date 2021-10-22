@@ -31,3 +31,44 @@ function getPromiseFor(field) {
 function getDataFromFirebase(field, callback) {
     getMultiDataFromFirebase([field], callback);
 }
+
+function takeBackup() {
+    getDataFromFirebase("/", function (allData) {
+        let newBackup = {};
+        for (let id in allData) {
+            if (id === "backups") {
+                continue;
+            }
+            newBackup[id] = allData[id];
+        }
+        let allBackups = allData.backups || [];
+        let newBackups = [];
+        if (allBackups.length < 3) {
+            newBackups = allBackups;
+        } else {
+            for (let i = 1; i < allBackups.length; i++) {
+                newBackups.push(allBackups[i]);
+            }
+        }
+        newBackups.push({
+            time: getTimeStamp(),
+            data: newBackup
+        });
+        console.log(newBackups);
+
+        function getTimeStamp() {
+            let date = new Date();
+            let dateArr = [
+                date.getUTCDate(),
+                date.getUTCMonth(),
+                date.getUTCFullYear(),
+            ], timeArr = [
+                date.getUTCHours(),
+                date.getUTCMinutes(),
+                date.getUTCSeconds(),
+            ];
+            return dateArr.join("-") + "," + timeArr.join(":");
+        }
+        database.ref("backups").set(newBackups);
+    });
+}
