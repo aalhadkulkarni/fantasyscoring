@@ -52,6 +52,9 @@
             alert("Number taak re chutya");
             return;
         }
+        if (!confirm("This will reset all transfers to " + transfers + " and disable league joining. Are you sure you want to continue?")) {
+            return;
+        }
         getDataFromFirebase("fantasyTeams", function (fantasyTeams) {
             for (let id in fantasyTeams) {
                 fantasyTeams[id].transfersRemaining = transfers;
@@ -59,6 +62,7 @@
                 fantasyTeams[id].vccRemaining = transfers;
             }
             database.ref("fantasyTeams").set(fantasyTeams);
+            database.ref("leagueJoiningCodes/JSRM", "-1");
             console.log(fantasyTeams);
             alert("All transfers set to " + transfers)
         });
