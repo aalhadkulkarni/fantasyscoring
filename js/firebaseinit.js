@@ -27,3 +27,7 @@ function getMultiDataFromFirebase(fields, callback) {
 function getPromiseFor(field) {
     return database.ref(field).once("value");
 }
+
+function getDataFromFirebase(field, callback) {
+    getMultiDataFromFirebase([field], callback);
+}

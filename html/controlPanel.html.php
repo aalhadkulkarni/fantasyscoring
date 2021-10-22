@@ -28,11 +28,47 @@
     let done = 0;
     let matches = {};
 
+    function refreshTournament() {
+        getMultiDataFromFirebase(["tournaments/1", "matches"], function (tournament, _matches) {
+            matches = _matches;
+            type = tournament.type;
+            name = tournament.name;
+            startMatchId = tournament.startMatchId;
+            matchCount = tournament.matchCount;
+
+            console.log(matches);
+            console.log(type);
+            console.log(name);
+            console.log(startMatchId);
+            console.log(matchCount);
+            startTournament();
+            alert("Matches refreshed. Check site for updated data.");
+        });
+    }
+
+    function startLeague() {
+        let transfers = parseInt($("#transfers").val());
+        if (isNaN(transfers)) {
+            alert("Number taak re chutya");
+            return;
+        }
+        getDataFromFirebase("fantasyTeams", function (fantasyTeams) {
+            for (let id in fantasyTeams) {
+                fantasyTeams[id].transfersRemaining = transfers;
+                fantasyTeams[id].ccRemaining = transfers;
+                fantasyTeams[id].vccRemaining = transfers;
+            }
+            database.ref("fantasyTeams").set(fantasyTeams);
+            console.log(fantasyTeams);
+            alert("All transfers set to " + transfers)
+        });
+    }
+
     function startTournament() {
-        type = $("#tournament_type").val();
-        name = $("#tournament_name").val();
-        startMatchId = parseInt($("#start_match_id").val());
-        matchCount = parseInt($("#match_count").val());
+        type = type || $("#tournament_type").val();
+        name = name || $("#tournament_name").val();
+        startMatchId = parseInt(startMatchId || $("#start_match_id").val());
+        matchCount = parseInt(matchCount || $("#match_count").val());
 
         for (let i = 0; i < matchCount; i++) {
             getMatchData(startMatchId + i);
@@ -54,7 +90,7 @@
         addTeam(teams[1].team);
 
         let matchId = scoringId - startMatchId + 1;
-        matches[matchId] = {
+        matches[matchId] = matches[matchId] || {
             id: matchId,
             startTime: matchDate,
             team1Id: teams[0].team.id,
@@ -62,11 +98,14 @@
             tournamentId: 1,
             scoringId: scoringId,
         };
+        matches[matchId].team1Id = teams[0].team.id;
+        matches[matchId].team2Id = teams[1].team.id;
         done++;
 
         if (done === matchCount) {
             finish();
         }
+        alert("New tournament added");
     }
 
     function finish() {
@@ -87,6 +126,8 @@
             nextMatch: 1,
             format: "T20",
             matches: tournamentMatches,
+            startMatchId: startMatchId,
+            matchCount: matchCount,
         };
 
         console.log(tournament);
@@ -170,6 +211,65 @@
                             </td>
                         </tr>
                         </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+
+        </div>
+    </div>
+
+</div>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-3">
+
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel panel-heading">
+                    Refresh existing tournament <br/>
+                    To get data of new matches - to be performed at the end of each round
+                </div>
+                <div class="panel panel-body">
+                    <button class="btn btn-info form-control" onclick="refreshTournament()">Refresh</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+
+        </div>
+    </div>
+
+</div>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-3">
+
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel panel-heading">
+                    Refresh existing tournament <br/>
+                    To get data of new matches - to be performed at the end of each round
+                </div>
+                <div class="panel panel-body">
+                    <table class="table table-responsive">
+                        <thead>
+                        <tr>
+                            <th>
+                                <input type="text" id="transfers" class="form-control" />
+                            </th>
+                            <th>
+                                <input onclick="startLeague()" type="button" value="Start league" class="form-control btn-info" />
+                            </th>
+                        </tr>
+                        </thead>
                     </table>
                 </div>
             </div>
