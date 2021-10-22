@@ -62,7 +62,7 @@
                 fantasyTeams[id].vccRemaining = transfers;
             }
             database.ref("fantasyTeams").set(fantasyTeams);
-            database.ref("leagueJoiningCodes/JSRM", "-1");
+            database.ref("leagueJoiningCodes/JSRM").set("-1");
             console.log(fantasyTeams);
             alert("All transfers set to " + transfers)
         });
