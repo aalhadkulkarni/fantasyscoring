@@ -125,6 +125,7 @@
             selectOption(roleSelect, player.role);
 
             selectOption(currentSelect, player.selected ? "Yes" : "No");
+            actionButton = "";
         }
 
         tr.append(newTd(idInput));
