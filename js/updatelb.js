@@ -65,6 +65,7 @@ function processFantasyLeagueScores() {
 }
 
 function updateScoresInDb() {
+    takeBackup();
     processFantasyLeagueScores();
     $(".control").hide();
     console.log(fantasyPlayers);

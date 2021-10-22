@@ -23,6 +23,7 @@
 <body>
 
 <script>
+    takeBackup();
     let globalTeams = {}, teams = {};
     let tournament;
     let players, globalPlayers;

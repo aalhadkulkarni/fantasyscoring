@@ -23,6 +23,7 @@
 <body>
 
 <script>
+    takeBackup();
     let globalTeams = {}, teams = {};
     let type, name, startMatchId, matchCount;
     let done = 0;
