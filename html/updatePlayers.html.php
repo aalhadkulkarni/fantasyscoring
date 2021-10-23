@@ -216,7 +216,6 @@
                     iplTeam: iplTeam,
                     intlTeam: intlTeam,
                     role: role,
-                    points: 0,
                 };
 
                 if (tournament.type === "International") {
@@ -232,7 +231,10 @@
                     }
                     playerObj.selected = 1;
 
-                    playersNew[id] = playerObj;
+                    playersNew[id] = playersNew || {};
+                    for (let key in playerObj) {
+                        playersNew[id][key] = playerObj[key];
+                    }
                     addToTeam(id, iplTeam);
                     addToTeam(id, intlTeam);
                 }
