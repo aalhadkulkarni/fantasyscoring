@@ -231,7 +231,8 @@
                     }
                     playerObj.selected = 1;
 
-                    playersNew[id] = playersNew || {};
+                    console.log(id);
+                    playersNew[id] = playersNew[id] || {};
                     for (let key in playerObj) {
                         playersNew[id][key] = playerObj[key];
                     }
