@@ -82,8 +82,25 @@
 
     function getMatchData(matchId) {
         console.log(matchId);
-        $.get("https://cricketapi.platform.iplt20.com//fixtures/" + matchId + "/scoring").done(function (data) {
-            processMatchData(matchId, data);
+//         $.get("https://cricketapi.platform.iplt20.com//fixtures/" + matchId + "/scoring").done(function (data) {
+//             processMatchData(matchId, data);
+//         });
+        processMatchData(matchId, {
+            matchIndo: {
+                teams: {[
+                    id: 545,
+                        fullName: 'TBC',
+                        abbreviation: 'TBC',
+                        type: 'IPL',
+                ], [
+                    id: 545,
+                        
+                        fullName: 'TBC',
+                        abbreviation: 'TBC',
+                        type: 'IPL',
+                ]},
+                matchDate: '2022-03-26T19:30:00+0530'
+            };
         });
     }
 
