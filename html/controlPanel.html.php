@@ -155,6 +155,8 @@
         console.log(tournament);
         database.ref("tournaments/1").set(tournament);
         database.ref("matches").set(matches);
+        database.ref("users").set(null);
+        database.ref("fantasyTeams").set(null);
     }
 
     function addTeam(team) {
