@@ -87,21 +87,19 @@
 //         });
         processMatchData(matchId, {
             matchInfo: {
-                teams: {[
-                    {
-                        id: 545,
-                        fullName: 'TBC',
-                        abbreviation: 'TBC',
-                        type: 'IPL',
-                    }, {
-                        id: 545,
-                        fullName: 'TBC',
-                        abbreviation: 'TBC',
-                        type: 'IPL',
-                    }
-                ]},
-                matchDate: '2022-03-26T19:30:00+0530'
-            }
+                teams: [{
+                    id: 545,
+                    fullName: 'TBC',
+                    abbreviation: 'TBC',
+                    type: 'IPL',
+                }, {
+                    id: 545,
+                    fullName: 'TBC',
+                    abbreviation: 'TBC',
+                    type: 'IPL',
+                }],
+                matchDate: '2022-03-26T19:30:00+0530',
+            },  
         });
     }
 
