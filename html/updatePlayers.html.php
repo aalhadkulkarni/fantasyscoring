@@ -138,6 +138,7 @@
         tr.append(newTd(intlTeamSelect));
         tr.append(newTd(currentSelect));
         tr.append(newTd(roleSelect));
+        tr.append(newId(newIplIdInput));
         tr.append(newTd(actionButton));
 
         table.append(tr);
