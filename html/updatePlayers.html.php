@@ -23,6 +23,16 @@
 <body>
 
 <script>
+    let squads = {};
+    function onsquadFixture(squads) {
+        addSquad(squads.squadA);
+        addSquad(squads.squadB);
+    }
+    window.addSquad = function(squad) {
+        for (let i in squad) {
+            squads[squad[i].PlayerID] = squad[i].PlayerName;
+        }
+    };
     takeBackup();
     let globalTeams = {}, teams = {};
     let tournament;
