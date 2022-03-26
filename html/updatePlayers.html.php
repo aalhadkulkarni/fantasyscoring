@@ -101,6 +101,7 @@
         let intlTeamSelect = newSelect("intlTeam", htmlId, intlTeamOptions);
         let currentSelect = newSelect("current", htmlId, yesNoOptions);
         let roleSelect = newSelect("role", htmlId, roleOptions);
+        let newIplIdInput = newText("newIplId", htmlId);
         let actionButton = newButton("action", htmlId, "Delete");
         actionButton.bind("click", function() {
             if (!confirm("This player will be permanently deleted from the system. Are you sure you want to proceed?")) {
@@ -124,6 +125,8 @@
             }
 
             selectOption(roleSelect, player.role);
+
+            newIplIdInput.val(player.newIplId || '');
 
             selectOption(currentSelect, player.selected ? "Yes" : "No");
             actionButton = "";
@@ -209,6 +212,7 @@
                 let intlTeam = getElement("intlTeam", i).val();
                 let current = getElement("current", i).val();
                 let role = getElement("role", i).val();
+                let newIplId = getElement("newIplId", i).val();
 
                 let playerObj = {
                     id: id,
@@ -216,6 +220,7 @@
                     iplTeam: iplTeam,
                     intlTeam: intlTeam,
                     role: role,
+                    newIplId: newIplId,
                 };
 
                 if (tournament.type === "International") {
@@ -313,6 +318,7 @@
                             <th>Intl Team</th>
                             <th>Active</th>
                             <th>Role</th>
+                            <th>New IPL Id</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -321,11 +327,11 @@
                         <tfoot>
                         <tr>
                         <tr>
-                            <td colspan="7">
+                            <td colspan="8">
                                 <input onclick="addNewRow()" type="button" name="newRow" value="Add new player" class="form-control btn-info"/>
                             </td>
                         </tr>
-                            <td colspan="7">
+                            <td colspan="8">
                                 <input onclick="updatePlayers()" type="button" name="submit" value="Update players" class="form-control btn-info" />
                             </td>
                         </tr>
