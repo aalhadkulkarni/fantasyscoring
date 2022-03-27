@@ -514,11 +514,15 @@ function addInnings(iplInnings) {
         } else if (!notOut && outDesc != "") {
             mod.out = true;
             let desc = outDesc.split(" ");
+            console.log(desc);
             if (isCaught(desc)) {
+                console.log("Caught", outDesc, getCatcher(outDesc));
                 fielderName = getCatcher(outDesc);
             } else if (isStumped(desc)) {
+                console.log("Stumped", outDesc, getKeeper(outDesc));
                 fielderName = getKeeper(outDesc);
             } else if (isRunOut(desc)) {
+                console.log("Run out", outDesc, getFielder(outDesc));
                 fielderName = getFielder(outDesc);
             }
             if (fielderName.length > 0) {
