@@ -504,7 +504,7 @@ function addInnings(iplInnings) {
             sr = iplBatsmanStats.StrikeRate,
             fours = iplBatsmanStats.Fours,
             sixes = iplBatsmanStats.Sixes,
-            outDesc = iplBatsmanStats.outDesc,
+            outDesc = iplBatsmanStats.OutDesc,
             notOut = outDesc == "not out";
         let fielderName = "";
         let mod = {};
@@ -512,7 +512,6 @@ function addInnings(iplInnings) {
             mod.out = false;
         } else if (!notOut && outDesc != "") {
             mod.out = true;
-            console.log(iplBatsmanStats);
             let desc = outDesc.split(" ");
             if (isCaught(desc)) {
                 fielderName = getCatcher(outDesc);
