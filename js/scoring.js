@@ -520,7 +520,7 @@ function addInnings(iplInnings) {
             } else if (isRunOut(desc)) {
                 fielderName = getFielder(outDesc);
             }
-            battingStat.mod = {
+            bowlingStats.mod = {
 
             };
             if (fielderName.length > 0) {
