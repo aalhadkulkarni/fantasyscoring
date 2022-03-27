@@ -2,7 +2,7 @@ function processFantasyLeagueScores() {
     for (var fantasyTeamId in fantasyTeams) {
         var fantasyTeam = fantasyTeams[fantasyTeamId];
         var prevmatch = matchNo - 1;
-        if (prevmatch % 5 == 0) {
+        if (prevmatch % 7 == 0) {
             fantasyTeam.gwScore = 0;
         }
         fantasyTeam.playerPoints = fantasyTeam.playerPoints || {};
@@ -11,10 +11,10 @@ function processFantasyLeagueScores() {
         for(var matchId in scoringPlayers) {
             var mid = parseInt(matchId);
             if (mid>applicableMatchId && mid<=matchNo) {
-                if (fantasyTeam.leagueId == 2 && matchNo <= 56) {
-                    var curGwM1 = (matchNo - matchNo % 8) + 1;
+                if (fantasyTeam.leagueId == 2 && matchNo <= 70) {
+                    var curGwM1 = (matchNo - matchNo % 7) + 1;
                     if (curGwM1 > matchNo) {
-                        curGwM1 -= 8;
+                        curGwM1 -= 7;
                     }
                     if (mid <= curGwM1) {
                         applicableMatchId = mid;
