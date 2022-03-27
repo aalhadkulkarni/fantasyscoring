@@ -566,7 +566,7 @@ function addInnings(iplInnings) {
         players: teamPlayers,
         team: {
             id: teamId,
-            fullName: fantasyTeams[teamId].fullName,
+            fullName: teamsInDb[teamId].fullName,
         }
     });
 }
