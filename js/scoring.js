@@ -445,7 +445,8 @@ function fetchInnings(inningsNo) {
 
 function addInnings(iplInnings) {
     let teamId,
-        teamPlayers = [],
+        teamPlayers = [];
+
     function getPlayerId(iplPlayerId) {
         return iplPlayers[iplPlayerId];
     }
