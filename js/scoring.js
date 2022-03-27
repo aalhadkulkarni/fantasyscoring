@@ -774,7 +774,7 @@ function getTeams() {
 function getPlayers() {
     function setIplPlayers() {
         for (let i in playersInDb) {
-            iplPlayers[playersInDb[i].newId] = i;
+            iplPlayers[playersInDb[i].newIplId] = i;
         }
     }
     database.ref("players")
