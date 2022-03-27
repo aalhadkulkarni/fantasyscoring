@@ -521,9 +521,6 @@ function addInnings(iplInnings) {
             } else if (isRunOut(desc)) {
                 fielderName = getFielder(outDesc);
             }
-            bowlingStats.mod = {
-
-            };
             if (fielderName.length > 0) {
                 mod.additionalPlayerIds = [getPlayerId(getIPLPlayerId(fielderName))];
             }
@@ -550,6 +547,7 @@ function addInnings(iplInnings) {
             maid = iplBowlerStats.Maidens,
             e = iplBowlerStats.Economy;
         bowlingStats.push({
+            "playerId": playerId,
             "w": w,
             "d": d,
             "maid": maid,
