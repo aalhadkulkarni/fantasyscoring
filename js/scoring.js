@@ -567,6 +567,7 @@ function addInnings(iplInnings) {
             bowlingStats: bowlingStats,
         },
     });
+    console.log(teamId);
     modifiedMatchObj.matchInfo.teams.push({
         players: teamPlayers,
         team: {
