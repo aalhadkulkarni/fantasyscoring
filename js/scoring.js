@@ -495,6 +495,10 @@ function addInnings(iplInnings) {
     for (let i = 0; i < battingCard.length; i++) {
         let iplBatsmanStats = battingCard[i];
         let playerId = getPlayerId(iplBatsmanStats.PlayerID);
+        if (playerId == null) {
+            alert("Could not find " + iplBatsmanStats.playerName + ", skipping the player");
+            continue;
+        }
         teamId = getTeamId(iplBatsmanStats.TeamID);
         console.log(iplBatsmanStats.TeamID);
         teamPlayers.push({
@@ -553,6 +557,10 @@ function addInnings(iplInnings) {
             d = iplBowlerStats.DotBalls,
             maid = iplBowlerStats.Maidens,
             e = iplBowlerStats.Economy;
+        if (playerId == null) {
+            alert("Could not find " + iplBowlerStats.playerName + ", skipping the player");
+            continue;
+        }
         bowlingStats.push({
             "playerId": playerId,
             "w": w,
