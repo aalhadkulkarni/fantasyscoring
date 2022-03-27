@@ -544,7 +544,7 @@ function addInnings(iplInnings) {
     for (let i = 0; i < bowlingCard.length; i++) {
         let iplBowlerStats = bowlingCard[i],
             playerId = getPlayerId(iplBowlerStats.PlayerID);
-            w = iplBowlerStats.Wickets.,
+            w = iplBowlerStats.Wickets,
             d = iplBowlerStats.DotBalls,
             maid = iplBowlerStats.Maidens,
             e = iplBowlerStats.Economy;
