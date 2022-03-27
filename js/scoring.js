@@ -421,7 +421,7 @@ function HattrickScoring() {
 }
 
 let modifiedMatchObj = {
-    innings: []
+    innings: [],
     matchInfo: {
         teams: [],
     };
