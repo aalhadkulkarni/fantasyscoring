@@ -751,7 +751,7 @@ function getFantasyPlayers() {
         .once('value')
         .then(function (data) {
             fantasyPlayers = data.val();
-            setIplPlayers();
+            getTeams();
         });
 }
 
@@ -782,7 +782,6 @@ function getPlayers() {
             playersInDb = data.val();
             setIplPlayers();
             getNewPlayers();
-            window.scoringReady();
         });
 }
 
