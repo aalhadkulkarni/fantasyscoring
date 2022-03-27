@@ -14,19 +14,19 @@
 <body>
 
 <script>
-    var iplTeams = {};
+    var allTeams = {};
     window.matchDataReady = function () {
         calculateAndDisplayScores();
     };
 
     window.scoringReady = function () {
-        getIplTeams();
+        getAllTeams();
 
-        function getIplTeams() {
+        function getAllTeams() {
             database.ref('teams')
                 .once('value')
                 .then(function (data) {
-                    iplTeams = data.val();
+                    allTeams = data.val();
                     getMatches();
                 });
         }
@@ -40,7 +40,7 @@
                 for (var i = 1; i < matches.length; i++) {
                     var match = matches[i];
                     var matchName = i + ". ";
-                    matchName += iplTeams[match.team1Id].shortName + " x " + iplTeams[match.team2Id].shortName + " - ";
+                    matchName += allTeams[match.team1Id].shortName + " x " + allTeams[match.team2Id].shortName + " - ";
                     matchName += match.startTime.substr(0, 10);
                     var option = $("<option value='" + i + "'>" + matchName + "</option>");
                     $("#matches").append(option);
