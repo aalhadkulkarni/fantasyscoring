@@ -489,7 +489,7 @@ function addInnings(iplInnings) {
         bowlingStats = [];
 
     let battingCard = iplInnings.BattingCard;
-    for (let i = 0; i < battingCard.length. i++) {
+    for (let i = 0; i < battingCard.length; i++) {
         let iplBatsmanStats = battingCard[i];
         let playerId = getPlayerId(iplBatsmanStats.PlayerID);
         teamId = getTeamId(iplBatsmanStats.TeamID);
