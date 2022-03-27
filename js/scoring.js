@@ -8,17 +8,23 @@ var playerTeams = {};
 var playerNames = {};
 var fantasyTeams = {};
 var fantasyPlayers = {};
+var iplTeams = {};
+var iplPlayers = {};
 var jackpotScore = 0;
 var scoringDetails = {};
 var MoMId = null;
 var hattrickId = null;
 var matchFromDB = {};
+var playersInDb = {};
+var teamsInDb = {};
+var newPlayers = {};
+var playerNameMap = {};
 
 window.matchDataReady = function () {
     $(".control").show();
 };
 
-function onScoring(iplMatch) {
+function onActualScoring(iplMatch) {
     matchObj = iplMatch;
     setTeamsAndPlayers();
 
@@ -414,6 +420,156 @@ function HattrickScoring() {
     }
 }
 
+let modifiedMatchObj = {
+    innings: []
+    matchInfo: {
+        teams: [],
+    };
+};
+
+function onScoring(data) {
+    if (data.Innings1) {
+        addInnings(data. Innings1);
+        fetchInnings(2)
+    } else if (data.Innings2) {
+        addInnings(data.Innings2);
+        onActualScoring(modifiedMatchObj);
+    }
+}
+
+function fetchInnings(inningsNo) {
+    let script = document.createElement("script");
+    script.src = "https://ipl-stats-sports-mechanic.s3.ap-south-1.amazonaws.com/ipl/feeds/" + (matchNo + 455) + "-Innings" + inningsNo + ".js";
+    document.body.appendChild(script);
+}
+
+function addInnings(iplInnings) {
+    let teamId,
+        teamPlayers = [],
+    function getPlayerId(iplPlayerId) {
+        return iplPlayers[iplPlayerId];
+    }
+
+    function getTeamId(iplTeamId) {
+        return iplTeams[iplTeamId];
+    }
+
+    function getIPLPlayerId(playerName) {
+        return playerNameMap[playerName];
+    }
+
+    function isCaught(desc) {
+        return desc[0] == "c";
+    }
+
+    function getCatcher(outDesc) {
+        let parts = outDesc.split(" b ");
+        return parts[0].replace("c ", "");
+    }
+
+    function isStumped(desc) {
+        return desc[0] == "st";
+    }
+
+    function getKeeper(outDesc) {
+        let parts = outDesc.split(" b ");
+        return parts[0].replace("st ", "");
+    }
+
+    function isRunOut(desc) {
+        return desc[0] == "run" && desc[1] == "out";
+    }
+
+    function getFielder(outDesc) {
+        return outDesc.replace("run out ", "").replace("(", "").replace(")", "");
+    }
+
+    let battingStats = [],
+        bowlingStats = [];
+
+    let battingCard = iplInnings.BattingCard;
+    for (let i = 0; i < battingCard.length. i++) {
+        let iplBatsmanStats = battingCard[i];
+        let playerId = getPlayerId(iplBatsmanStats.PlayerID);
+        teamId = getTeamId(iplBatsmanStats.TeamID);
+        teamPlayers.push({
+            id: playerId,
+            fullName: iplBatsmanStats.PlayerName,
+            shortName: iplBatsmanStats.PlayerShortName,
+        });
+
+        let r = iplBatsmanStats.Runs,
+            b = iplBatsmanStats.Balls,
+            sr = iplBatsmanStats.StrikeRate,
+            fours = iplBatsmanStats.Fours,
+            sixes = iplBatsmanStats.Sixes,
+            outDesc = iplBatsmanStats.outDesc,
+            notOut = outDesc == "not out";
+        let fielderName = "";
+        let mod = {};
+        if (notOut) {
+            mod.out = false;
+        } else if (!notOut && outDesc != "") {
+            mod.out = true;
+            let desc = outDesc.split(" ");
+            if (isCaught(desc)) {
+                fielderName = getCatcher(outDesc);
+            } else if (isStumped(desc)) {
+                fielderName = getKeeper(outDesc);
+            } else if (isRunOut(desc)) {
+                fielderName = getFielder(outDesc);
+            }
+            battingStat.mod = {
+
+            };
+            if (fielderName.length > 0) {
+                mod.additionalPlayerIds = [getPlayerId(getIPLPlayerId(fielderName))];
+            }
+        } else {
+            continue;
+        }
+        battingsStats.push({
+            "playerId": playerId,
+            "b": b,
+            "r": r,
+            "sr": sr,
+            "4s": fours,
+            "6s": sixes,
+            "mod": mod,
+        });
+    }
+
+    let bowlingCard = iplInnings.BowlingCard;
+    for (let i = 0; i < bowlingCard.length; i++) {
+        let iplBowlerStats = bowlingCard[i],
+            playerId = getPlayerId(iplBowlerStats.PlayerID);
+            w = iplBowlerStats.Wickets.,
+            d = iplBowlerStats.DotBalls,
+            maid = iplBowlerStats.Maidens,
+            e = iplBowlerStats.Economy;
+        bowlingStats.push({
+            "w": w,
+            "d": d,
+            "maid": maid,
+            "e": e,
+        });
+    }
+
+    modifiedMatchObj.innings.push({
+        scorecard: {
+            battingsStats: battingStats,
+            bowlingStats: bowlingStats,
+        },
+    });
+    modifiedMatchObj.matchInfo.teams.push({
+        players: teamPlayers,
+        team: {
+            id: teamId,
+            fullName: fantasyTeams[teamId].fullName,
+        }
+    });
+}
+
 function calculateScores() {
     var innings = matchObj.innings;
     for (var i in innings) {
@@ -538,19 +694,22 @@ function getMatchData(matchNo) {
     // script.src = "https://datacdn.iplt20.com/dynamic/data/core/cricket/2012/ipl2021/ipl2021-" + matchNoString + "/scoring.js";
     // document.getElementsByTagName('head')[0].appendChild(script);
     //
-    if (window.location.href.indexOf("testjsrm") !== -1) {
-        getMatchFromId(32212 + parseInt(matchNo) - 1);
-    } else {
-        getMatchFromDB(matchNo, function(matchFromDb) {
-            getMatchFromId(matchFromDb.scoringId);
-        });
-    }
+    // if (window.location.href.indexOf("testjsrm") !== -1) {
+    //     getMatchFromId(32212 + parseInt(matchNo) - 1);
+    // } else {
+    //     getMatchFromDB(matchNo, function(matchFromDb) {
+    //         getMatchFromId(matchFromDb.scoringId);
+    //     });
+    // }
 
-    function getMatchFromId(matchId) {
-        $.get("https://cricketapi.platform.iplt20.com//fixtures/" + matchId + "/scoring").done(function (data) {
-            onScoring(data);
-        });
-    }
+    // function getMatchFromId(matchId) {
+    //     $.get("https://cricketapi.platform.iplt20.com//fixtures/" + matchId + "/scoring").done(function (data) {
+    //         onScoring(data);
+    //     });
+    // }
+
+    //https://ipl-stats-sports-mechanic.s3.ap-south-1.amazonaws.com/ipl/feeds/456-Innings1.js?onScoring=_jqjsp&_1648321460797=
+    fetchInnings(1);
 }
 
 getFirebaseData();
@@ -591,6 +750,52 @@ function getFantasyPlayers() {
         .once('value')
         .then(function (data) {
             fantasyPlayers = data.val();
+            setIplPlayers();
+        });
+}
+
+function getTeams() {
+    function setIplTeams() {
+        for (let i in teamsInDb) {
+            iplTeams[teamsInDb[i].newId] = i;
+        }
+    }
+    database.ref("teams")
+        .once('value')
+        .then(function (data) {
+            teamsInDb = data.val();
+            setIplTeams();
+            getPlayers();
+        });
+}
+
+function getPlayers() {
+    function setIplPlayers() {
+        for (let i in playersInDb) {
+            iplPlayers[playersInDb[i].newId] = i;
+        }
+    }
+    database.ref("players")
+        .once('value')
+        .then(function (data) {
+            playersInDb = data.val();
+            setIplPlayers();
+            getNewPlayers();
+            window.scoringReady();
+        });
+}
+
+function getNewPlayers() {
+    function setPlayerNameMap() {
+        for (let i in newPlayers) {
+            playerNameMap[newPlayers[i]] = i;
+        }
+    }
+    database.ref("newPlayers")
+        .once('value')
+        .then(function (data) {
+            newPlayers = data.val();
+            setPlayerNameMap();
             window.scoringReady();
         });
 }
