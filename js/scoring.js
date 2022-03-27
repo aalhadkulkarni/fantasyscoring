@@ -557,7 +557,7 @@ function addInnings(iplInnings) {
 
     modifiedMatchObj.innings.push({
         scorecard: {
-            battingsStats: battingStats,
+            battingStats: battingStats,
             bowlingStats: bowlingStats,
         },
     });
