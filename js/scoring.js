@@ -496,7 +496,7 @@ function addInnings(iplInnings) {
         let iplBatsmanStats = battingCard[i];
         let playerId = getPlayerId(iplBatsmanStats.PlayerID);
         if (playerId == null) {
-            alert("Could not find " + iplBatsmanStats.playerName + ", skipping the player");
+            alert("Could not find " + iplBatsmanStats.PlayerName + ", skipping the player");
             continue;
         }
         teamId = getTeamId(iplBatsmanStats.TeamID);
@@ -558,7 +558,7 @@ function addInnings(iplInnings) {
             maid = iplBowlerStats.Maidens,
             e = iplBowlerStats.Economy;
         if (playerId == null) {
-            alert("Could not find " + iplBowlerStats.playerName + ", skipping the player");
+            alert("Could not find " + iplBowlerStats.PlayerName + ", skipping the player");
             continue;
         }
         bowlingStats.push({
