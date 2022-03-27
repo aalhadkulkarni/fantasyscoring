@@ -424,7 +424,7 @@ let modifiedMatchObj = {
     innings: [],
     matchInfo: {
         teams: [],
-    };
+    },
 };
 
 function onScoring(data) {
