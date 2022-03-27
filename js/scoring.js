@@ -25,6 +25,7 @@ window.matchDataReady = function () {
 };
 
 function onActualScoring(iplMatch) {
+    console.log(iplMatch);
     matchObj = iplMatch;
     setTeamsAndPlayers();
 
