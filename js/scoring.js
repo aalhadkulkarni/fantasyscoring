@@ -1,4 +1,5 @@
 var matchNo = null;
+var actualMatchNo = null;
 var winningTeamId = null, losingTeamId = null;
 var playerScores = {};
 var matchObj = null;
@@ -440,7 +441,7 @@ function onScoring(data) {
 
 function fetchInnings(inningsNo) {
     let script = document.createElement("script");
-    script.src = "https://ipl-stats-sports-mechanic.s3.ap-south-1.amazonaws.com/ipl/feeds/" + (matchNo + 455) + "-Innings" + inningsNo + ".js";
+    script.src = "https://ipl-stats-sports-mechanic.s3.ap-south-1.amazonaws.com/ipl/feeds/" + (actualMatchNo + 455) + "-Innings" + inningsNo + ".js";
     document.body.appendChild(script);
 }
 
@@ -714,6 +715,7 @@ function getMatchData(matchNo) {
     // }
 
     //https://ipl-stats-sports-mechanic.s3.ap-south-1.amazonaws.com/ipl/feeds/456-Innings1.js?onScoring=_jqjsp&_1648321460797=
+    actualMatchNo = matchNo;
     fetchInnings(1);
 }
 
