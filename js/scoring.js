@@ -529,7 +529,7 @@ function addInnings(iplInnings) {
         } else {
             continue;
         }
-        battingsStats.push({
+        battingStats.push({
             "playerId": playerId,
             "b": b,
             "r": r,
