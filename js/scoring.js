@@ -496,6 +496,7 @@ function addInnings(iplInnings) {
         let iplBatsmanStats = battingCard[i];
         let playerId = getPlayerId(iplBatsmanStats.PlayerID);
         teamId = getTeamId(iplBatsmanStats.TeamID);
+        console.log(iplBatsmanStats.TeamID);
         teamPlayers.push({
             id: playerId,
             fullName: iplBatsmanStats.PlayerName,
