@@ -512,6 +512,7 @@ function addInnings(iplInnings) {
             mod.out = false;
         } else if (!notOut && outDesc != "") {
             mod.out = true;
+            console.log(iplBatsmanStats);
             let desc = outDesc.split(" ");
             if (isCaught(desc)) {
                 fielderName = getCatcher(outDesc);
