@@ -715,7 +715,7 @@ function getMatchData(matchNo) {
     // }
 
     //https://ipl-stats-sports-mechanic.s3.ap-south-1.amazonaws.com/ipl/feeds/456-Innings1.js?onScoring=_jqjsp&_1648321460797=
-    actualMatchNo = matchNo;
+    actualMatchNo = parseInt(matchNo);
     fetchInnings(1);
 }
 
