@@ -457,6 +457,7 @@ function addInnings(iplInnings) {
     }
 
     function getIPLPlayerId(playerName) {
+        console.log(playerName, playerNameMap, playerNameMap[playerName]);
         return playerNameMap[playerName];
     }
 
