@@ -463,6 +463,14 @@ function addInnings(iplInnings) {
         return playerNameMap[playerName];
     }
 
+    function isCaughtAndBowled(desc) {
+        return desc[0] == "c" && desc[1] == "&" && desc[2] == "b";
+    }
+
+    function getCatcherBowler(outDesc) {
+        return outDesc.replace("c & b ");
+    }
+
     function isCaught(desc) {
         return desc[0] == "c";
     }
@@ -523,7 +531,10 @@ function addInnings(iplInnings) {
             mod.out = true;
             let desc = outDesc.split(" ");
             console.log(desc);
-            if (isCaught(desc)) {
+            if (isCaughtAndBowled(desc)) {
+                console.log("Caught and bowled", outDesc, getCatcherBowler(outDesc));
+                fielderName = getCatcherBowler(outDesc);
+            } else if (isCaught(desc)) {
                 console.log("Caught", outDesc, getCatcher(outDesc));
                 fielderName = getCatcher(outDesc);
             } else if (isStumped(desc)) {
