@@ -468,7 +468,7 @@ function addInnings(iplInnings) {
     }
 
     function getCatcherBowler(outDesc) {
-        return outDesc.replace("c & b ");
+        return outDesc.replace("c & b ", "");
     }
 
     function isCaught(desc) {
