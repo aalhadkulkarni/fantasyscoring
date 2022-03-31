@@ -545,7 +545,10 @@ function addInnings(iplInnings) {
                 fielderName = getFielder(outDesc);
             }
             if (fielderName.length > 0) {
-                mod.additionalPlayerIds = [getPlayerId(getIPLPlayerId(fielderName))];
+                let fielderId = getPlayerId(getIPLPlayerId(fielderName));
+                if (fielderId != undefined) {
+                    mod.additionalPlayerIds = [fielderId];
+                }
             }
         } else {
             continue;
