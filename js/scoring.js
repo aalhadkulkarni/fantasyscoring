@@ -803,7 +803,7 @@ function getMatchFromDB(matchId, callback) {
         .then(function (data) {
             matchFromDB = data.val();
             console.log(matchFromDB);
-            intlMatchId = matchFromDB.scoringId;
+            window.intlMatchId = matchFromDB.scoringId;
             callback(matchFromDB);
         });
 }
