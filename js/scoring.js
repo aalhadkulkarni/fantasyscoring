@@ -800,6 +800,7 @@ function getMatchFromDB(matchId, callback) {
         .once('value')
         .then(function (data) {
             matchFromDB = data.val();
+            console.log(matchFromDB);
             intlMatchId = matchFromDB.scoringId;
             callback(matchFromDB);
         });
