@@ -20,6 +20,7 @@ var playersInDb = {};
 var teamsInDb = {};
 var newPlayers = {};
 var playerNameMap = {};
+var intlMatchId = 0;
 
 window.matchDataReady = function () {
     $(".control").show();
@@ -799,6 +800,7 @@ function getMatchFromDB(matchId, callback) {
         .once('value')
         .then(function (data) {
             matchFromDB = data.val();
+            intlMatchId = matchFromDB.scoringId;
             callback(matchFromDB);
         });
 }

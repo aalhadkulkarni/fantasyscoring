@@ -16,7 +16,8 @@
 
 <script>
     window.scoringReady = function () {
-        getMatchData(matchNo);
+        //getMatchData(matchNo);
+        getIntlMatchData(intlMatchId);
     };
 
     function calculateButtonClicked() {
