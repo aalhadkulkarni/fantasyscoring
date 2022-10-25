@@ -744,6 +744,41 @@ function getMatchData(matchNo) {
     fetchInnings(1);
 }
 
+function getIntlMatchData(matchId) {
+    console.log(matchNo);
+    // var matchNoString = matchId.toString();
+    // if (matchNoString.length == 1) {
+    //     matchNoString = "0" + "" + matchNoString;
+    // }
+    // var head = document.getElementsByTagName("head")[0];
+    // var script = document.createElement('script');
+    // script.type = 'text/javascript';
+    // script.async = true;
+    // script.src = "https://datacdn.iplt20.com/dynamic/data/core/cricket/2012/ipl2021/ipl2021-" + matchNoString + "/scoring.js";
+    // document.getElementsByTagName('head')[0].appendChild(script);
+    //
+    // if (window.location.href.indexOf("testjsrm") !== -1) {
+    //     getMatchFromId(32212 + parseInt(matchNo) - 1);
+    // } else {
+    //     getMatchFromDB(matchNo, function(matchFromDb) {
+    //         getMatchFromId(matchFromDb.scoringId);
+    //     });
+    // }
+
+    // function getMatchFromId(matchId) {
+    //     $.get("https://cricketapi.platform.iplt20.com//fixtures/" + matchId + "/scoring").done(function (data) {
+    //         onScoring(data);
+    //     });
+    // }
+
+    //https://ipl-stats-sports-mechanic.s3.ap-south-1.amazonaws.com/ipl/feeds/456-Innings1.js?onScoring=_jqjsp&_1648321460797=
+    $.get("https://api.icc.cdp.pulselive.com/fixtures/" + matchId + "/scoring").done(function (data) {
+        onScoring(data);
+     })
+    //actualMatchNo = parseInt(matchNo);
+    //fetchInnings(1);
+}
+
 getFirebaseData();
 
 function getFirebaseData() {
