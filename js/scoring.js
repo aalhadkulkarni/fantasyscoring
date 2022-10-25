@@ -791,7 +791,9 @@ function getNextMatchId() {
         .once('value')
         .then(function (data) {
             matchNo = data.val();
-            getFantasyTeams();
+            getMatchFromDB(matchNo, function() {
+                getFantasyTeams();
+            })
         });
 }
 
