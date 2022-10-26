@@ -773,7 +773,8 @@ function getIntlMatchData(matchId) {
     // }
 
     //https://ipl-stats-sports-mechanic.s3.ap-south-1.amazonaws.com/ipl/feeds/456-Innings1.js?onScoring=_jqjsp&_1648321460797=
-    $.get("https://api.icc.cdp.pulselive.com/fixtures/" + matchId + "/scoring").done(function (data) {
+    $.getJSON("https://api.icc.cdp.pulselive.com/fixtures/" + matchId + "/scoring").done(function (data) {
+        console.log(data);
         onScoring(data);
      })
     //actualMatchNo = parseInt(matchNo);
