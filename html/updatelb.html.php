@@ -20,8 +20,8 @@
         alert('Ready');
     };
 
-    function matchIdProvided() {
-        getIntlMatchData($("#matchId").val());
+    function scoreDone() {
+        onActualScoring(JSON.parse($("#scorecard").val()));
     }
 
     function calculateButtonClicked() {
@@ -30,8 +30,8 @@
     }
 </script>
 
-<input id="matchId" class="conrol" plaeholder="Match id" />
-<button onclick = "matchIdProvided()">Get score</button>
+<input id="scorecard" class="conrol" plaeholder="Scorecard" />
+<button onclick = "scoreDone()">Process scorecard</button>
 
 <select id="MoM" class = "control">
     <option value disabled selected>Select MoM</option>
