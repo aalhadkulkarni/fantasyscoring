@@ -786,6 +786,10 @@ function getIntlMatchData(matchId) {
     });
 }
 
+function jsonCallback(json){
+    console.log(json);
+  }
+
 getFirebaseData();
 
 function getFirebaseData() {
