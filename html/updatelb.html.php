@@ -30,7 +30,7 @@
     }
 </script>
 
-<input id="scorecard" class="conrol" plaeholder="Scorecard" />
+<textarea id="scorecard" class="conrol" plaeholder="Scorecard"></textarea>
 <button onclick = "scoreDone()">Process scorecard</button>
 
 <select id="MoM" class = "control">
