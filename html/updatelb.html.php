@@ -31,7 +31,7 @@
 </script>
 
 <input id="matchId" class="conrol" plaeholder="Match id" />
-<button onclick = "maychIdProvided()">Get score</button>
+<button onclick = "matchIdProvided()">Get score</button>
 
 <select id="MoM" class = "control">
     <option value disabled selected>Select MoM</option>
