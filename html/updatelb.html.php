@@ -17,7 +17,8 @@
 <script>
     window.scoringReady = function () {
         //getMatchData(matchNo);
-        getIntlMatchData(intlMatchId);
+        console.log(window.intlMatchId);
+        getIntlMatchData(window.intlMatchId);
     };
 
     function calculateButtonClicked() {
@@ -38,6 +39,8 @@
 <select id="teams" class = "control">
     <option value disabled selected>Select Winning Team</option>
 </select>
+
+<input id="matchId" class="conrol" plaeholder="Match id" />
 
 <button onclick="calculateButtonClicked()" id = "calc" class = "control">Calculate and display scores</button>
 
