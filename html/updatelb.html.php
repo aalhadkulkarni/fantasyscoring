@@ -17,8 +17,8 @@
 <script>
     window.scoringReady = function () {
         //getMatchData(matchNo);
-        console.log(window.intlMatchId);
-        getIntlMatchData(window.intlMatchId);
+        
+        getIntlMatchData($("#matchId").val());
     };
 
     function calculateButtonClicked() {
