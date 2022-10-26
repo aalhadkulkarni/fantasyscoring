@@ -804,6 +804,7 @@ function getMatchFromDB(matchId, callback) {
             matchFromDB = data.val();
             console.log(matchFromDB);
             window.intlMatchId = matchFromDB.scoringId;
+            console.log(window.intlMatchId);
             callback(matchFromDB);
         });
 }
