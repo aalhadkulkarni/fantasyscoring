@@ -17,9 +17,12 @@
 <script>
     window.scoringReady = function () {
         //getMatchData(matchNo);
-        
-        getIntlMatchData($("#matchId").val());
+        alert('Ready');
     };
+
+    function matchIdProvided() {
+        getIntlMatchData($("#matchId").val());
+    }
 
     function calculateButtonClicked() {
         $("#calc").hide();
@@ -27,6 +30,8 @@
     }
 </script>
 
+<input id="matchId" class="conrol" plaeholder="Match id" />
+<button onclick = "maychIdProvided()">Get score</button>
 
 <select id="MoM" class = "control">
     <option value disabled selected>Select MoM</option>
@@ -40,7 +45,6 @@
     <option value disabled selected>Select Winning Team</option>
 </select>
 
-<input id="matchId" class="conrol" plaeholder="Match id" />
 
 <button onclick="calculateButtonClicked()" id = "calc" class = "control">Calculate and display scores</button>
 
