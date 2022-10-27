@@ -80,6 +80,9 @@ function printPlayerScore(playerId) {
 
 function displayScores() {
     for (var playerId in playerScores) {
+        if (playerId == undefined) {
+            continue;
+        }
         console.log(playerNames[playerId] + "( " + playerId + " )" + " : " + playerScores[playerId]);
         printPlayerScore(playerId);
         jackpotScore += playerScores[playerId];
@@ -669,6 +672,9 @@ function calculateScores() {
     console.log(playerScores);
     //winning or losing team
     for(var playerId in playerScores) {
+        if (playerId == undefined) {
+            continue;
+        }
         var teamId = playerTeams[playerId];
         var matchResultScoring = new MatchResultScoring(teamId, winningTeamId);
         var matchResultResult = matchResultScoring.getResult();
