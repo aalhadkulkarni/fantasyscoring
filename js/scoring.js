@@ -277,7 +277,7 @@ function BattingScoring(runs, balls, sr, boundaries, notOut, role) {
 }
 
 function addDescriptions(playerId, descriptions) {
-    if (playerId == undefined) {
+    if (playerId == undefined || !scoringDetails[playerId]) {
         return;
     }
     for (var i = 0; i < descriptions.length; i++) {
