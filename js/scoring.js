@@ -80,7 +80,8 @@ function printPlayerScore(playerId) {
 
 function displayScores() {
     for (var playerId in playerScores) {
-        if (playerId == undefined) {
+        console.log('Player', playerId);
+        if (playerId == undefined || isNaN(playerScores[playerId])) {
             continue;
         }
         console.log(playerNames[playerId] + "( " + playerId + " )" + " : " + playerScores[playerId]);
