@@ -75,7 +75,8 @@ function updateScoresInDb() {
 
     let filteredPlayers = {};
     for (let id in fantasyPlayers) {
-        if (fantasyPlayers[id] && fantasyPlayers[id].id == id) {
+        fantasyPlayers[id].points = fantasyPlayers[id].points || 0;
+        if (fantasyPlayers[id] && fantasyPlayers[id].id == id && !isNaN(fantasyPlayers[id].points)) {
             filteredPlayers[id] = fantasyPlayers[id];
         }
     }
