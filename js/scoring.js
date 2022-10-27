@@ -275,6 +275,10 @@ function BattingScoring(runs, balls, sr, boundaries, notOut, role) {
 function addDescriptions(playerId, descriptions) {
     for (var i = 0; i < descriptions.length; i++) {
         console.log(playerId);
+        if (!players[playerId]) {
+            console.log('Not found', playerId);
+            continue;
+        }
         scoringDetails[playerId].push(descriptions[i]);
     }
 }
