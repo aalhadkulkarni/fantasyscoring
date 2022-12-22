@@ -1,3 +1,3 @@
 <?php
 
-echo file_get_contents('html/abilities.html.php')
+include_once "html/abilities.html.php";
